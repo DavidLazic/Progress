@@ -1,0 +1,68 @@
+extends:
+  eslint-config-airbnb
+
+parser:
+  babel-eslint
+
+settings:
+  ecmascript: 6
+
+env:
+  browser: true
+
+rules:
+  arrow-body-style: [2, "as-needed"]
+  arrow-parens: 0
+  class-methods-use-this: 0
+  func-names: 0
+  indent: [2, 2, {"SwitchCase": 1}]
+  new-cap: 0
+  no-plusplus: 0
+  no-return-assign: 0
+  no-restricted-syntax: 0
+  no-trailing-spaces: [2, { "skipBlankLines": true }]
+  no-console: 0
+  no-param-reassign: 0
+  no-confusing-arrow: 0
+  no-mixed-operators: 0
+  no-restricted-properties: 0
+  no-prototype-builtins: 0
+  quote-props: [2, "consistent-as-needed"]
+  padded-blocks: 0
+  consistent-return: 0
+  max-len: 0
+  import/first: 0
+  global-require: 0
+  object-curly-spacing: 0
+  template-curly-spacing: 0
+  space-before-function-paren: [2, "always"]
+  comma-dangle: [2, "never"]
+  react/self-closing-comp: 0
+  react/jsx-closing-bracket-location: [2, { "selfClosing": "after-props", "nonEmpty": "after-props" }]
+  react/forbid-prop-types: 0
+  react/jsx-indent: [2, 2]
+  react/jsx-indent-props: [2, 2]
+  react/jsx-no-bind: [2, { "allowArrowFunctions": true, "allowBind": true }]
+  react/jsx-curly-spacing: [2, "always"]
+  react/jsx-filename-extension: 0
+  react/jsx-boolean-value: 0
+  react/no-children-prop: 0
+  react/sort-comp: [2, { order: ["static-methods", "lifecycle", "/^on.+$", "everything-else", "render"] }]
+  react/prefer-stateless-function: 0
+  import/extensions: 0
+  import/no-extraneous-dependencies: 0
+  import/no-unresolved: 0
+  react/no-string-refs: 0
+  react/no-array-index-key: 0
+  react/no-unescaped-entities: 0
+  import/prefer-default-export: 0
+  import/no-dynamic-require: 0
+  jsx-a11y/no-static-element-interactions: 0
+  linebreak-style: 0
+  jsx-a11y/href-no-hash: "off"
+  function-paren-newline: 0
+  react/no-unused-state: 0
+  object-curly-newline: 0
+  jsx-a11y/click-events-have-key-events: 0
+  jsx-a11y/no-noninteractive-element-interactions: 0
+  jsx-a11y/anchor-is-valid: 0

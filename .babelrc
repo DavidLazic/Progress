@@ -1,8 +1,10 @@
 {
   "presets": [
+    "@babel/react",
     [
       "@babel/env",
       {
+        "modules": false,
         "targets": {
           "browsers": "last 2 Chrome versions",
           "node": "current"
@@ -10,5 +12,10 @@
       }
     ]
   ],
-  "plugins": [["transform-object-rest-spread", { "useBuiltIns": true }]]
+  "plugins": [
+    "transform-decorators-legacy",
+    "syntax-decorators",
+    "transform-class-properties",
+    ["transform-object-rest-spread", { "useBuiltIns": true }]
+  ]
 }
