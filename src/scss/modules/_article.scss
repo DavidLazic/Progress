@@ -1,0 +1,28 @@
+.h__article {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    background: $site-background;
+
+    &--login {
+        align-items: center;
+    }
+
+    &--admin {
+        display: flex;
+        padding: 15px 10px 80px;
+        flex-direction: row;
+        height: 100%;
+        min-height: 100vh;
+        background: none;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .h__article {
+
+        &--admin {
+            padding: 30px 20px 80px;
+        }
+    }
+}

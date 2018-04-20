@@ -1,0 +1,22 @@
+.h__btn {
+
+    &--action {
+        @include transition(all, 0.25s, $transition-hover);
+        margin: 10px;
+        cursor: pointer;
+        vertical-align: middle;
+
+        &:hover {
+            fill: lighten($color-secondary, 15) !important;
+        }
+    }
+}
+
+@media screen and (min-width: 680px) {
+    .h__btn {
+
+        &--action {
+            margin: 15px;
+        }
+    }
+}

@@ -4,8 +4,8 @@ import { useTransition } from './utils/useTransition';
 import { useForm } from './utils/useForm';
 
 export default {
-    useNavigation,
-    useRestricted,
-    useForm,
-    useTransition
+  useNavigation,
+  useRestricted,
+  useForm,
+  useTransition
 };

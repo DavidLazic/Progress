@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import history from 'routes/history';
+import history from 'src/routes/history';
 
 /**
  * @description
@@ -11,38 +11,38 @@ import history from 'routes/history';
  * @public
  */
 export const useNavigation = (WrappedComponent = () => null) =>
-    class UseNavigation extends Component {
+  class UseNavigation extends Component {
 
-        /**
-         * @description
-         * On navigate to route.
-         *
-         * @param {String} route
-         * @param {Object} props
-         * @return {Function}
-         * @public
-         */
-        onNavigate = (route, props) => history.push(route, props)
+    /**
+     * @description
+     * On navigate to route.
+     *
+     * @param {String} route
+     * @param {Object} props
+     * @return {Function}
+     * @public
+     */
+    onNavigate = (route, props) => history.push(route, props)
 
-        /**
-         * @description
-         * On debounce navigate to route.
-         *
-         * @param {String} route
-         * @param {Object} props
-         * @param {Number} debounce
-         * @return {Function}
-         * @public
-         */
-        onNavigateDebounce = (route, props, debounce) =>
-            setTimeout(() => history.push(route, props), debounce)
+    /**
+     * @description
+     * On debounce navigate to route.
+     *
+     * @param {String} route
+     * @param {Object} props
+     * @param {Number} debounce
+     * @return {Function}
+     * @public
+     */
+    onNavigateDebounce = (route, props, debounce) =>
+      setTimeout(() => history.push(route, props), debounce)
 
-        render () {
-            return (
-                <WrappedComponent
-                    { ...this.props }
-                    navigateDebounce={ this.onNavigateDebounce }
-                    navigate={ this.onNavigate } />
-            );
-        }
-    };
+    render () {
+      return (
+        <WrappedComponent
+          { ...this.props }
+          navigateDebounce={ this.onNavigateDebounce }
+          navigate={ this.onNavigate } />
+      );
+    }
+  };

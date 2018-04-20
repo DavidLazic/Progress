@@ -1,0 +1,14 @@
+.h__project {
+
+    &-filter {
+        @include transition(all, 0.325s, $transition-standard, 0.12s);
+        margin-bottom: 30px;
+        height: 60px;
+        background: $site-highlight;
+
+        .active & {
+            transform: translateY(-60px);
+            -webkit-transform: translateY(-60px);
+        }
+    }
+}

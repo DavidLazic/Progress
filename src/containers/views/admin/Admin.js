@@ -1,45 +1,43 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 import classNames from 'classnames';
-import { routeCodes } from 'routes';
+import { routeCodes } from 'src/routes';
 import { augmentComponent } from 'react-augment';
-import HOC from 'lib/decorators';
-import muiThemeable from 'material-ui/styles/muiThemeable';
+import HOC from 'src/lib/decorators';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from 'actions';
-import * as types from 'actions/types';
-import AdminSidebar from 'components/AdminSidebar';
-import Appbar from 'components/Appbar';
+import { ActionCreators } from 'src/actions';
+import * as types from 'src/actions/types';
+import AdminSidebar from 'src/components/AdminSidebar';
+import Appbar from 'src/components/Appbar';
 
 @connect(state => ({
-    Auth: state.authReducer[types.AUTH]
+  Auth: state.authReducer[types.AUTH]
 }), dispatch => ({
-    actions: bindActionCreators(ActionCreators, dispatch)
+  actions: bindActionCreators(ActionCreators, dispatch)
 }))
 @augmentComponent([
-    HOC.useRestricted,
-    HOC.useNavigation
+  HOC.useRestricted,
+  HOC.useNavigation
 ])
-@muiThemeable()
 export default class Admin extends Component {
 
     static propTypes = {
-        navigate: t.func.isRequired,
-        location: t.object.isRequired,
-        muiTheme: t.object.isRequired,
-        children: t.object
+      navigate: t.func.isRequired,
+      location: t.object.isRequired,
+      muiTheme: t.object.isRequired,
+      children: t.object
     }
 
     static defaultProps = {
-        children: {}
+      children: {}
     }
 
     state = { menuActive: false }
     routes = {
-        [routeCodes.ADMIN]: 'Admin',
-        [routeCodes.ADMIN_PROJECTS]: 'Projects',
-        [routeCodes.ADMIN_PROJECT_CREATE]: 'Create Project'
+      [routeCodes.ADMIN]: 'Admin',
+      [routeCodes.ADMIN_PROJECTS]: 'Projects',
+      [routeCodes.ADMIN_PROJECT_CREATE]: 'Create Project'
     }
 
     /**
@@ -62,33 +60,33 @@ export default class Admin extends Component {
     onToggleMenu = menuStatus => this.setState({ menuActive: menuStatus.active })
 
     render () {
-        const classes = classNames({
-            'h__article h__article--admin': true,
-            'h__article--menu-open': this.state.menuActive
-        });
+      const classes = classNames({
+        'h__article h__article--admin': true,
+        'h__article--menu-open': this.state.menuActive
+      });
 
-        return (
-            <section
-                className={ classes }
-                style={ { backgroundColor: this.props.muiTheme.palette.canvasColor } }>
+      return (
+        <section
+          className={ classes }
+          style={ { backgroundColor: this.props.muiTheme.palette.canvasColor } }>
 
-                <AdminSidebar
-                    onToggleMenu={ () =>
-                        this.state.menuActive &&
+          <AdminSidebar
+            onToggleMenu={ () =>
+              this.state.menuActive &&
                         this.onToggleMenu({ active: false }) }
-                    path={ this.props.location.pathname } />
+            path={ this.props.location.pathname } />
 
-                <section className="h__pusher">
+          <section className="h__pusher">
 
-                    <Appbar
-                        title={ this.getRouteTitle() }
-                        path={ this.props.location.pathname }
-                        navigate={ this.props.navigate }
-                        onToggleMenu={ this.onToggleMenu } />
+            <Appbar
+              title={ this.getRouteTitle() }
+              path={ this.props.location.pathname }
+              navigate={ this.props.navigate }
+              onToggleMenu={ this.onToggleMenu } />
 
-                    { this.props.children }
-                </section>
-            </section>
-        );
+            { this.props.children }
+          </section>
+        </section>
+      );
     }
 }

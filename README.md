@@ -85,3 +85,20 @@ Once the packaging process finished, the `dist` directory will contain your dist
 We use [electron-builder](https://github.com/electron-userland/electron-builder) to handle the packaging process. It has a lot of [customization options](https://www.electron.build/configuration/configuration), which you can declare under `"build"` key in `package.json`.
 
 You can package your app cross-platform from a single operating system, [electron-builder kind of supports this](https://www.electron.build/multi-platform-build), but there are limitations and asterisks. That's why this boilerplate doesn't do that by default.
+
+## Environment tasks
+
+| Environment | Command           | Description |
+| ----------- |:-----------------:| ----------- |
+| Local       | **npm run local** | Run local Node / React with hot reloading enabled.
+| Development | **npm run dev**   | Run non-minified DEV build.
+| QA          | **npm run qa**    | Run minified QA build (same as PROD build for testing).
+| Production  | **npm run prod**  | Run production build.
+
+
+#### Other tasks
+
+| Task    | Command             | Description |
+| ------- |:-------------------:| ----------- |
+| Clean   | **npm run clean**   | Clean `dist` project directory.
+| ESLint  | **npm run lint**    | Run ES6 error linter.

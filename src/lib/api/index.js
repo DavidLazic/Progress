@@ -1,5 +1,5 @@
-import config from 'constants/config';
-import storage from 'constants/localStorage';
+import config from 'src/constants/config';
+import storage from 'src/constants/localStorage';
 
 export default class Api {
 
@@ -9,9 +9,9 @@ export default class Api {
     static delete = (...args) => Api.httpRequest(Api.httpConfig('DELETE', ...args))
 
     static headers = () => new Headers({
-        'Content-Type': 'application/json',
-        'x-auth-token': localStorage.getItem(storage.TOKEN),
-        'dataType': 'json'
+      'Content-Type': 'application/json',
+      'x-auth-token': localStorage.getItem(storage.TOKEN),
+      'dataType': 'json'
     });
 
     /**
@@ -25,10 +25,10 @@ export default class Api {
      * @private
      */
     static httpConfig = (method, path, props) =>
-        new Request(`${config.BASE_PATH}${path}`, Object.assign({
-            method,
-            headers: Api.headers()
-        }, props ? { body: JSON.stringify(props) } : null));
+      new Request(`${config.BASE_PATH}${path}`, Object.assign({
+        method,
+        headers: Api.headers()
+      }, props ? { body: JSON.stringify(props) } : null));
 
     /**
      * @description

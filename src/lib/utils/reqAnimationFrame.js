@@ -6,10 +6,10 @@
  * @public
  */
 export default function reqAnimationFrame () {
-  turn window.requestAnimationFrame ||
+  return window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame ||
         function (callback) {
-          ndow.setTimeout(callback, 1000 / 60);
+          window.setTimeout(callback, 1000 / 60);
         };
 }

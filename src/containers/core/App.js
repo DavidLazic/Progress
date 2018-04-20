@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import t from 'prop-types';
 import { withRouter } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
-import { routeCodes } from 'routes';
+import { routeCodes } from 'src/routes';
 
-import Project from 'containers/views/Project.single';
+import Project from 'src/containers/views/Project.single';
 
 class App extends Component {
 

@@ -1,0 +1,22 @@
+.h__icon {
+
+    &--fab {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+    }
+}
+
+
+@media screen and (min-width: 680px) {
+    .h__icon {
+
+        &--hamburger {
+            display: none !important;
+        }
+
+        &--fab {
+            top: 15px;
+        }
+    }
+}

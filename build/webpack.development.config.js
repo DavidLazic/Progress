@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
@@ -21,11 +22,9 @@ module.exports = env => ({
   },
   externals: [nodeExternals()],
   resolve: {
-    modules: [
-      path.resolve(__dirname, '../src')
-    ],
     alias: {
-      env: path.resolve(__dirname, `../config/env.${env}.json`)
+      env: path.resolve(__dirname, `../config/env.${env}.json`),
+      src: path.resolve(__dirname, '../src')
     }
   },
   module: {
@@ -44,7 +43,13 @@ module.exports = env => ({
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'sass-loader?sourceMap']
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', options: { minimize: true } },
+            'sass-loader?sourceMap'
+          ]
+        })
       },
       {
         test: /\.(eot?.+|svg?.+|ttf?.+|otf?.+|woff?.+|woff2?.+)$/,
@@ -66,6 +71,10 @@ module.exports = env => ({
       path: path.resolve(__dirname, '../app'),
       excludeChunks: ['background'],
       filename: 'index.html'
+    }),
+    new ExtractTextPlugin({
+      filename: '[name].[contenthash].css',
+      allChunks: true
     })
   ]
 });

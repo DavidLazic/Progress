@@ -1,0 +1,69 @@
+.h__project {
+
+    &__title {
+        @include transition(all, 0.325s, $transition-ease-in, 0.1s);
+        position: relative;
+        display: flex;
+        padding: 15px 0;
+        height: 100%;
+        align-items: flex-end;
+        font-size: 22px;
+        font-family: $font-saira;
+        text-transform: uppercase;
+        background-color: rgba($site-highlight, 1);
+        color: $site-font-primary;
+
+        .h__list-item--projects:nth-child(even) &,
+        .h__modal--even & {
+            background-color: rgba($site-highlight-dark, 1);
+        }
+
+        > span:not(.h__bubble) {
+            @include transition(all, 0.325s, $transition-standard, 0.12s);
+            padding: 0 10px;
+            width: calc(100% / 1.4);
+            background-color: rgba($site-highlight, 0);
+        }
+
+        &:before {
+            position: absolute;
+            content: '';
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            z-index: 50;
+            width: 25%;
+            height: 4px;
+            background: linear-gradient(to right, $site-border-primary, $site-border-secondary);
+        }
+
+        .h__modal.active & {
+            background-color: rgba($site-highlight, 0);
+            transition-delay: 0.12s;
+            -webkit-transition-delay: 0.12s;
+
+            > span {
+                padding: 10px;
+                font-size: 26px;
+                background-color: rgba($site-highlight, 0.5);
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .h__project {
+
+        &__title {
+            font-size: 28px;
+
+            .h__modal.active & {
+
+                > span {
+                    font-size: 34px;
+                }
+            }
+        }
+    }
+}

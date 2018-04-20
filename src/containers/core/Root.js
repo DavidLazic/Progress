@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 import { Provider } from 'react-redux';
-// import Routes from 'routes';
-// import DevTools from './DevTools';
+import Routes from 'src/routes';
 
 export default class Root extends Component {
 
@@ -13,10 +12,7 @@ export default class Root extends Component {
     render () {
       return (
         <Provider store={ this.props.store }>
-          <div>
-            Hello
-            {/* <Routes /> */}
-          </div>
+          <Routes />
         </Provider>
       );
     }

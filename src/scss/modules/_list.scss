@@ -1,0 +1,25 @@
+.h__list {
+    width: 100%;
+
+    &-item {
+        position: relative;
+        overflow: hidden;
+
+        &--projects {
+        }
+    }
+}
+
+@media screen and (min-width: 680px) {
+    .h__list {
+        display: grid;
+        grid-gap: 5px;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-rows: repeat(2, 100px);
+
+        &-item {
+            // width: 30vw;
+            height: 30vw;
+        }
+    }
+}
