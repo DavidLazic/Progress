@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import t from 'prop-types';
 import { Provider } from 'react-redux';
 import Routes from 'src/routes';
+import DevTools from './DevTools';
+import env from 'env';
 
 export default class Root extends Component {
 
@@ -12,7 +14,12 @@ export default class Root extends Component {
     render () {
       return (
         <Provider store={ this.props.store }>
-          <Routes />
+          <div>
+            <Routes />
+            {
+              env.name === 'development' && <DevTools />
+            }
+          </div>
         </Provider>
       );
     }
