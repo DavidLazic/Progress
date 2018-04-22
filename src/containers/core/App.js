@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 import { withRouter } from 'react-router';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { routeCodes } from 'src/routes';
 
+import Sidebar from 'src/components/Sidebar';
 import Project from 'src/containers/views/Project.single';
 
 class App extends Component {
 
     static propTypes = {
       location: t.object,
-      children: t.array
+      children: t.object
     }
 
     static defaultProps = {
@@ -25,21 +26,20 @@ class App extends Component {
       const position = modal && location.state.meta.from || {};
 
       return (
-        <div>
-          {
-            React.Children.map(this.props.children, child =>
-              child && React.cloneElement(child, { key: child.id })) || null
-          }
+        <div className="h__article--menu-open">
+          <Sidebar path={ this.props.location.pathname } />
+
+          <section className="h__pusher">
+            { this.props.children }
+          </section>
 
           {
             modal &&
-            <Switch>
-              <Route
-                path={ `${routeCodes.PROJECTS}/:id` }
-                render={ props =>
-                  <Project { ...props } position={ position } />
-                } />
-            </Switch>
+            <Route
+              path={ `${routeCodes.PROJECTS}/:id` }
+              render={ props =>
+                <Project { ...props } position={ position } />
+              } />
           }
         </div>
       );

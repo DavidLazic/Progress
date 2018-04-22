@@ -1,84 +1,84 @@
-@import 
+@import
 'project.filter',
 'project.duration',
 'project.title';
 
 .h__project {
-    @include transition(max-height, 0.325s, $transition-standard, 0.12s);
-    position: relative;
-    max-height: 120px;
-    height: 100vh;
-    font-family: $font-montserrat;
-    background: url('images/theme_winter.jpeg') center no-repeat;
-    background-size: cover;
-    color: $site-font-secondary;
-    cursor: pointer;
+  @include transition(max-height, 0.325s, $transition-standard, 0.12s);
+  position: relative;
+  max-height: 120px;
+  height: 100vh;
+  font-family: $font-montserrat;
+  background: url('images/theme_winter.jpeg') center no-repeat;
+  background-size: cover;
+  color: $site-font-secondary;
+  cursor: pointer;
+
+  .h__modal.active & {
+    @include transition(max-height, 0.325s, $transition-standard, 0.1s);
+    max-height: 250px;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  &:before {
+    @include transition(opacity, 0.3s, $transition-ease-in, 0.12s);
+    @include centerY();
+    content: attr(data-letter);
+    font-family: $font-saira;
+    font-size: 80vw;
+    z-index: 2;
+    opacity: 0.2;
 
     .h__modal.active & {
-        @include transition(max-height, 0.325s, $transition-standard, 0.1s);
-        max-height: 250px;
-        pointer-events: none;
-        cursor: default;
+      opacity: 0;
+    }
+  }
+
+  &__months {
+    font-size: 20px;
+    text-transform: capitalize;
+    color: $site-font-secondary;
+  }
+
+  &__border {
+
+    &:before,
+    &:after {
+      position: absolute;
+      bottom: 0;
+      width: 50%;
+      height: 4px;
+      content: '';
     }
 
     &:before {
-        @include transition(opacity, 0.3s, $transition-ease-in, 0.12s);
-        @include centerY();
-        content: attr(data-letter);
-        font-family: $font-saira;
-        font-size: 80vw;
-        z-index: 2;
-        opacity: 0.2;
-
-        .h__modal.active & {
-            opacity: 0;
-        }
+      left: 0;
+      background: $site-border-primary;
     }
 
-    &__months {
-        font-size: 20px;
-        text-transform: capitalize;
-        color: $site-font-secondary;
+    &:after {
+      right: 0;
+      background: $site-border-secondary;
     }
-
-    &__border {
-
-        &:before,
-        &:after {
-            position: absolute;
-            bottom: 0;
-            width: 50%;
-            height: 4px;
-            content: '';
-        }
-
-        &:before {
-            left: 0;
-            background: $site-border-primary;
-        }
-
-        &:after {
-            right: 0;
-            background: $site-border-secondary;
-        }
-    }
+  }
 }
 
 @media screen and (min-width: 480px) {
-    .h__project {
+  .h__project {
 
-        .h__modal.active & {
-            max-height: 350px;
-        }
+    .h__modal.active & {
+      max-height: 350px;
     }
+  }
 }
 
 @media screen and (min-width: 680px) {
-    .h__project {
-        max-height: 100%;
+  .h__project {
+    max-height: 100%;
 
-        .h__modal.active & {
-            max-height: 250px;
-        }
+    .h__modal.active & {
+      max-height: 250px;
     }
+  }
 }

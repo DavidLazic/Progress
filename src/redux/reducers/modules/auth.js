@@ -9,4 +9,6 @@ const initState = {
   }
 };
 
-export const authReducer = createReducer(initState, createHandlers(Object.keys(initState)));
+export default {
+  authReducer: createReducer(initState, createHandlers(Object.keys(initState)))
+};

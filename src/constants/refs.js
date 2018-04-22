@@ -1,2 +1,3 @@
-export const AUTH = '/auth';
-export const PROJECTS = '/projects';
+export default {
+  PROJECTS: 'projects'
+};

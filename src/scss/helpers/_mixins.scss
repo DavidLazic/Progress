@@ -1,62 +1,62 @@
 @mixin transition ($type, $time, $effect, $delay: null) {
-    transition-property: $type;
-    -webkit-transition-property: $type;
-    transition-duration: $time;
-    -webkit-transition-duration: $time;
-    transition-timing-function: $effect;
-    -webkit-transition-timing-function: $effect;
-    transition-delay: $delay;
-    -webkit-transition-delay: $delay;
+  transition-property: $type;
+  -webkit-transition-property: $type;
+  transition-duration: $time;
+  -webkit-transition-duration: $time;
+  transition-timing-function: $effect;
+  -webkit-transition-timing-function: $effect;
+  transition-delay: $delay;
+  -webkit-transition-delay: $delay;
 }
 
 @mixin clearfix () {
-    &:after,
-    &:before {
-        display: table;
-        content: '';
-    }
+  &:after,
+  &:before {
+    display: table;
+    content: '';
+  }
 
-    &:after {
-        clear: both;
-    }
+  &:after {
+    clear: both;
+  }
 }
 
 @mixin center () {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    -webkit-transform: translate3d(-50%, -50%, 0);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  -webkit-transform: translate3d(-50%, -50%, 0);
 }
 
 @mixin centerX () {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
 }
 
 @mixin centerY () {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
 }
 
 @mixin horizontal-line () {
-    display: block;
-    margin: 10px 0;
-    height: 1px;
-    background-color: #fff;
-    content: '';
+  display: block;
+  margin: 10px 0;
+  height: 1px;
+  background-color: #fff;
+  content: '';
 }
 
 @mixin progressiveAnimationDelayIn ($start, $itemCount) {
-    @for $i from $start through $itemCount {
-        $time: $i / 8 + 0s;
-        &:nth-child(#{$i}) {
-            animation-delay: $time;
-            -webkit-animation-delay: $time;
-        }
+  @for $i from $start through $itemCount {
+    $time: $i / 8 + 0s;
+    &:nth-child(#{$i}) {
+      animation-delay: $time;
+      -webkit-animation-delay: $time;
     }
+  }
 }

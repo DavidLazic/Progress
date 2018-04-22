@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import t from 'prop-types';
 // import { routeCodes } from 'routes';
 
-export default class Appbar extends Component {
+export default class Header extends Component {
 
     static propTypes = {
       path: t.string.isRequired,

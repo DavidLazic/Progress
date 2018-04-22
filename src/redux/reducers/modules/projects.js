@@ -9,4 +9,6 @@ const initState = {
   }
 };
 
-export const projectsReducer = createReducer(initState, createHandlers(Object.keys(initState)));
+export default {
+  projectsReducer: createReducer(initState, createHandlers(Object.keys(initState)))
+};

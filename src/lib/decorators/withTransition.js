@@ -10,8 +10,8 @@ import t from 'prop-types';
  * @return {Object}
  * @public
  */
-export const useTransition = (WrappedComponent = () => null, config = {}) =>
-  class UseTransition extends Component {
+export const withTransition = (WrappedComponent = () => null, config = {}) =>
+  class WithTransition extends Component {
 
     static propTypes = {
       navigate: t.func.isRequired,
@@ -37,14 +37,14 @@ export const useTransition = (WrappedComponent = () => null, config = {}) =>
       if (this.props.onTransition) this.props.onTransition();
 
       return !this.state.animating &&
-            this.setState({ animating: true }, () => {
-              const span = document.createElement('span');
-              span.className = 'h__bubble';
-              span.style.top = `${e.nativeEvent.offsetY }px`;
-              span.style.left = `${e.nativeEvent.offsetX }px`;
-              e.target.appendChild(span);
-              return setTimeout(() => this.setState({ animating: false }, () => e.target.removeChild(span)), 650);
-            });
+        this.setState({ animating: true }, () => {
+          const span = document.createElement('span');
+          span.className = 'h__bubble';
+          span.style.top = `${e.nativeEvent.offsetY }px`;
+          span.style.left = `${e.nativeEvent.offsetX }px`;
+          e.target.appendChild(span);
+          return setTimeout(() => this.setState({ animating: false }, () => e.target.removeChild(span)), 650);
+        });
     }
 
 

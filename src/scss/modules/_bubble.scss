@@ -1,13 +1,13 @@
 .h__bubble {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    z-index: 9999;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  z-index: 9999;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
 
-    -webkit-transform-origin: 50% 50%;
-    transform-origin: 50% 50%;
-    -webkit-animation: bubble 0.65s linear forwards;
-    animation: bubble 0.65s linear forwards;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-animation: bubble 0.65s linear forwards;
+  animation: bubble 0.65s linear forwards;
 }

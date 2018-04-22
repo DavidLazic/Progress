@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 import { augmentComponent } from 'react-augment';
-import HOC from 'src/lib/decorators';
+import { withNavigation, withTransition } from 'src/lib/decorators';
 import { routeCodes } from 'src/routes';
 import Utils from 'src/lib/utils';
 
 @augmentComponent([
-  HOC.useNavigation,
-  HOC.useTransition
+  withNavigation,
+  withTransition
 ], {
   transition: { className: 'h__list-item h__list-item--projects' }
 })

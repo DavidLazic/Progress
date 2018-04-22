@@ -1,17 +1,17 @@
 .h__glitch {
 
-    &:after {
-        content: attr(data-text);
-        position: absolute;
-        left: 0;
-        text-shadow: -1px 0 #000;
-        top: 0;
-        height: 100%;
-        color: #3f6;
-        will-change: clip-path;
-        background: clear;
-        overflow: hidden;
-        animation: noise2 1s infinite linear alternate-reverse;
-        -webkit-animation: noise2 1s infinite linear alternate-reverse;
-    }
+  &:after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    text-shadow: -1px 0 #000;
+    top: 0;
+    height: 100%;
+    color: #3f6;
+    will-change: clip-path;
+    background: clear;
+    overflow: hidden;
+    animation: noise2 1s infinite linear alternate-reverse;
+    -webkit-animation: noise2 1s infinite linear alternate-reverse;
+  }
 }

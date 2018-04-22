@@ -3,11 +3,10 @@ import * as types from 'src/actions/types';
 
 const initState = {
   [types.MODAL]: {
-    data: null,
-    loading: false,
-    active: false,
-    error: null
+    active: false
   }
 };
 
-export const modalReducer = createReducer(initState, createHandlers(Object.keys(initState)));
+export default {
+  modalReducer: createReducer(initState, createHandlers(Object.keys(initState)))
+};

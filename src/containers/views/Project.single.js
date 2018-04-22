@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
-import HOC from 'src/lib/decorators';
+import { withNavigation } from 'src/lib/decorators';
 import classNames from 'classnames';
 import Utils from 'src/lib/utils';
 import { routeCodes } from 'src/routes';
@@ -12,7 +12,7 @@ import ProjectItem from 'src/components/project/Project.item';
 // import IconBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 @augmentComponent([
-  HOC.useNavigation
+  withNavigation
 ])
 @connect(state => state, dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
@@ -39,7 +39,7 @@ export default class ProjectSingle extends Component {
     componentDidMount = () => setTimeout(() => this.setState({ active: true }), 0)
 
     onBack = () => this.setState({ active: false }, () => {
-      this.props.actions.modalToggle(false);
+      this.props.actions.modalToggle({ active: false });
       return this.props.navigateDebounce(routeCodes.PROJECTS, null, 475);
     })
 

@@ -4,9 +4,11 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
+import { augmentComponent } from 'react-augment';
+import { withSocket } from 'src/lib/decorators';
+import refs from 'src/constants/refs';
 import * as types from 'src/actions/types';
 import ProjectItem from 'src/components/project/Project.item';
-import ProjectFilter from 'src/components/project/Project.filter';
 
 @connect(state => ({
   Projects: state.projectsReducer[types.PROJECTS],
@@ -14,7 +16,11 @@ import ProjectFilter from 'src/components/project/Project.filter';
 }), dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
-
+@augmentComponent([
+  withSocket
+], {
+  socket: { refs: [refs.PROJECTS] }
+})
 export default class Projects extends Component {
 
     static propTypes = {
@@ -29,9 +35,7 @@ export default class Projects extends Component {
       Modal: null
     }
 
-    componentDidMount = () => this.props.actions.getProjects()
-
-    onTransition = () => this.props.actions.modalToggle(true)
+    onTransition = () => this.props.actions.modalToggle({ active: true })
 
     render () {
       const classes = classNames({
@@ -41,18 +45,16 @@ export default class Projects extends Component {
 
       return (
         <article className={ classes }>
-          <ProjectFilter />
-
           <div className="h__list">
             {
               this.props.Projects.data &&
-                        this.props.Projects.data.map((project, index) => (
-                          <ProjectItem
-                            key={ project.id }
-                            history={ this.props.history }
-                            onTransition={ this.onTransition }
-                            project={ { ...project, index } } />
-                        ))
+              Object.keys(this.props.Projects.data).map((key, index) => (
+                <ProjectItem
+                  key={ key }
+                  history={ this.props.history }
+                  onTransition={ this.onTransition }
+                  project={ { ...this.props.Projects.data[key], index } } />
+              ))
             }
           </div>
         </article>

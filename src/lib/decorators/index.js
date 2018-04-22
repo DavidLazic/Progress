@@ -1,11 +1,11 @@
-import { useNavigation } from './utils/useNavigation';
-import { useRestricted } from './utils/useRestricted';
-import { useTransition } from './utils/useTransition';
-import { useForm } from './utils/useForm';
+import { withNavigation } from './withNavigation';
+import { withTransition } from './withTransition';
+import { withForm } from './withForm';
+import { withSocket } from './withSocket';
 
-export default {
-  useNavigation,
-  useRestricted,
-  useForm,
-  useTransition
+export {
+  withNavigation,
+  withForm,
+  withTransition,
+  withSocket
 };

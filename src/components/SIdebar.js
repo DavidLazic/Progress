@@ -10,10 +10,9 @@ import { ActionCreators } from 'src/actions';
 @connect(state => state, dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
-export default class AdminSidebar extends Component {
+export default class Sidebar extends Component {
 
     static propTypes = {
-      onToggleMenu: t.func.isRequired,
       path: t.string.isRequired,
       actions: t.object.isRequired
     }
@@ -21,8 +20,7 @@ export default class AdminSidebar extends Component {
     constructor (props) {
       super(props);
       this.routes = {
-        [routeCodes.ADMIN]: 'Admin',
-        [routeCodes.ADMIN_PROJECTS]: 'Projects'
+        [routeCodes.ROOT]: 'Projects'
       };
       this.state = {
         active: this.getActiveRoute(this.props.path)
@@ -43,15 +41,6 @@ export default class AdminSidebar extends Component {
 
     /**
      * @description
-     * Check whether to show sidebar
-     *
-     * @return {Bool}
-     * @private
-     */
-    showSidebar = () => !/admin\/[a-z]+\/.+/.test(this.props.path)
-
-    /**
-     * @description
      * On logout fn
      *
      * @return {Function}
@@ -60,12 +49,8 @@ export default class AdminSidebar extends Component {
     onLogout = () => this.props.actions.logout()
 
     render () {
-      return this.showSidebar() ? (
+      return (
         <section className="h__sidemenu">
-          <div
-            className="h__sidemenu__overlay"
-            onClick={ () => this.props.onToggleMenu() } />
-
           <ul className="h__sidemenu__list">
             {
               Object.keys(this.routes).map((route, index) => (
@@ -84,6 +69,6 @@ export default class AdminSidebar extends Component {
             </li>
           </ul>
         </section>
-      ) : null;
+      );
     }
 }

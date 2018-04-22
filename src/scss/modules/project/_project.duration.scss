@@ -1,45 +1,45 @@
 .h__project {
 
-    &__duration {
-        display: flex;
-        padding: 10px;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        width: calc(100vw / 4);
-        font-size: 72px;
-        font-size: 10vw;
-        font-weight: bold;
-        text-align: center;
-        background-color: $site-highlight;
-        color: $site-font-primary;
+  &__duration {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: calc(100vw / 4);
+    font-size: 72px;
+    font-size: 10vw;
+    font-weight: bold;
+    text-align: center;
+    background-color: $site-highlight;
+    color: $site-font-primary;
 
-        > div {
-            margin-top: 5px;
-            font-size: 22px;
-            font-size: 4vw;
-            font-family: $font-saira;
-            text-transform: uppercase;
-            color: $site-font-secondary;
-        }
-
-        &:after {
-            position: absolute;
-            content: '';
-            top: 0;
-            left: -16vw;
-            z-index: 50;
-            width: 0;
-            height: 0;
-            border: 11vw solid transparent;
-            border-right: 5vw solid $site-highlight;
-
-            .h__project--even & {
-                left: -20vw;
-                right: 100%;
-                border-left: 15vw solid transparent;
-                border-right: 5vw solid $site-highlight;
-            }
-        }
+    > div {
+      margin-top: 5px;
+      font-size: 22px;
+      font-size: 4vw;
+      font-family: $font-saira;
+      text-transform: uppercase;
+      color: $site-font-secondary;
     }
+
+    &:after {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: -16vw;
+      z-index: 50;
+      width: 0;
+      height: 0;
+      border: 11vw solid transparent;
+      border-right: 5vw solid $site-highlight;
+
+      .h__project--even & {
+        left: -20vw;
+        right: 100%;
+        border-left: 15vw solid transparent;
+        border-right: 5vw solid $site-highlight;
+      }
+    }
+  }
 }

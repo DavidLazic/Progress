@@ -1,14 +1,4 @@
-export const AUTH = 'AUTH';
-export const SESSION_USER_PING = 'SESSION_USER_PING';
-export const SESSION_USER_LOGIN = 'SESSION_USER_LOGIN';
-export const SESSION_USER = 'SESSION_USER';
-export const SESSION_TOKEN = 'SESSION_TOKEN';
-
 export const PROJECTS = 'PROJECTS';
-export const PROJECTS_GET = 'PROJECTS_GET';
-export const PROJECTS_CREATE = 'PROJECTS_CREATE';
-export const PROJECTS_UPDATE = 'PROJECTS_UPDATE';
-export const PROJECTS_DELETE = 'PROJECTS_DELETE';
+export const AUTH = 'AUTH';
 
 export const MODAL = 'MODAL';
-export const MODAL_TOGGLE = 'MODAL_TOGGLE';

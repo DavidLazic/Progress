@@ -18,7 +18,7 @@ const MODEL = {
 };
 
 @augmentComponent([
-  HOC.useForm
+  HOC.withForm
 ], MODEL)
 export default class FormProject extends Component {
 
