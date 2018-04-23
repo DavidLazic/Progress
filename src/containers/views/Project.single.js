@@ -39,7 +39,7 @@ export default class Project extends Component {
     componentDidMount = () => setTimeout(() => this.setState({ active: true }), 0)
 
     onBack = () => this.setState({ active: false }, () => {
-      this.props.actions.modalToggle({ active: false });
+      this.props.actions.setModal({ active: false });
       return this.props.navigateDebounce(routeCodes.PROJECTS, null, 475);
     })
 

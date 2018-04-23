@@ -36,7 +36,7 @@ export default class Projects extends Component {
       Modal: null
     }
 
-    onTransition = () => this.props.actions.modalToggle({ active: true })
+    onTransition = () => this.props.actions.setModal({ active: true })
 
     render () {
       const classes = classNames({

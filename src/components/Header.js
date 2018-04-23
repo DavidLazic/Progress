@@ -1,52 +1,29 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
-// import { routeCodes } from 'routes';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from 'src/actions';
+import * as types from 'src/actions/types';
 
+@connect(state => ({
+  Sidebar: state.sidebarReducer[types.SIDEBAR]
+}), dispatch => ({
+  actions: bindActionCreators(ActionCreators, dispatch)
+}))
 export default class Header extends Component {
 
     static propTypes = {
-      path: t.string.isRequired,
-      title: t.string
-      // navigate: t.func.isRequired,
-      // onToggleMenu: t.func.isRequired
+      actions: t.object.isRequired,
+      Sidebar: t.object.isRequired
     }
 
-    static defaultProps = {
-      title: ''
-    }
-
-    /**
-     * @description
-     * Check whether to show hamburger menu or back arrow
-     *
-     * @return {Bool}
-     * @private
-     */
-    showHamburger = () => !/admin\/[a-z]+\/.+/.test(this.props.path)
+    onSidebarToggle = () => this.props.actions.setSidebar({ active: !this.props.Sidebar.active })
 
     render () {
       return (
-        <div className="h__appbar">
-          {
-            // this.showHamburger() ?
-            //   <IconButton
-            //     className="h__icon h__icon--hamburger"
-            //     style={ { width: 'auto', height: 'auto' } }
-            //     iconStyle={ { width: 36, height: 36 } }
-            //     onClick={ () => this.props.onToggleMenu({ active: true }) }
-            //     touch={ true }>
-            //     <IconMenu />
-            //   </IconButton> :
-            //   <IconButton
-            //     onClick={ () => this.props.navigate(routeCodes.ADMIN_PROJECTS) }
-            //     style={ { width: 'auto', height: 'auto' } }
-            //     iconStyle={ { width: 36, height: 36 } }
-            //     touch={ true }>
-            //     <IconBack />
-            //   </IconButton>
-          }
-
-          <div className="h__appbar__title">{ this.props.title }</div>
+        <div className="h__header">
+          <button onClick={ this.onSidebarToggle }>Sidebar</button>
+          <button>Login</button>
         </div>
       );
     }
