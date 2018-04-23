@@ -8,7 +8,8 @@ import { augmentComponent } from 'react-augment';
 import { withSocket } from 'src/lib/decorators';
 import refs from 'src/constants/refs';
 import * as types from 'src/actions/types';
-import ProjectItem from 'src/components/project/Project.item';
+import { ProjectItem } from 'src/components/project';
+import { AnimateBubble } from 'src/components/animate';
 
 @connect(state => ({
   Projects: state.projectsReducer[types.PROJECTS],
@@ -49,11 +50,12 @@ export default class Projects extends Component {
             {
               this.props.Projects.data &&
               Object.keys(this.props.Projects.data).map((key, index) => (
-                <ProjectItem
-                  key={ key }
-                  history={ this.props.history }
-                  onTransition={ this.onTransition }
-                  project={ { ...this.props.Projects.data[key], index } } />
+                <AnimateBubble key={ key }>
+                  <ProjectItem
+                    history={ this.props.history }
+                    onTransition={ this.onTransition }
+                    project={ { ...this.props.Projects.data[key], index } } />
+                </AnimateBubble>
               ))
             }
           </div>

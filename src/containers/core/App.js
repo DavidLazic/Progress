@@ -4,8 +4,8 @@ import { withRouter } from 'react-router';
 import { Route } from 'react-router-dom';
 import { routeCodes } from 'src/routes';
 
-import Sidebar from 'src/components/Sidebar';
-import Project from 'src/containers/views/Project.single';
+import { Sidebar } from 'src/components';
+import { Project } from 'src/containers/views';
 
 class App extends Component {
 
@@ -31,16 +31,16 @@ class App extends Component {
 
           <section className="h__pusher">
             { this.props.children }
-          </section>
 
-          {
-            modal &&
-            <Route
-              path={ `${routeCodes.PROJECTS}/:id` }
-              render={ props =>
-                <Project { ...props } position={ position } />
-              } />
-          }
+            {
+              modal &&
+              <Route
+                path={ `${routeCodes.PROJECTS}/:id` }
+                render={ props =>
+                  <Project { ...props } position={ position } />
+                } />
+            }
+          </section>
         </div>
       );
     }

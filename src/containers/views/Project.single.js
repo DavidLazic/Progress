@@ -8,7 +8,7 @@ import { withNavigation } from 'src/lib/decorators';
 import classNames from 'classnames';
 import Utils from 'src/lib/utils';
 import { routeCodes } from 'src/routes';
-import ProjectItem from 'src/components/project/Project.item';
+import { ProjectItem } from 'src/components/project';
 // import IconBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 @augmentComponent([
@@ -17,7 +17,7 @@ import ProjectItem from 'src/components/project/Project.item';
 @connect(state => state, dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
-export default class ProjectSingle extends Component {
+export default class Project extends Component {
 
     static propTypes = {
       actions: t.object.isRequired,

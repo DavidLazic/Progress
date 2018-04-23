@@ -1,19 +1,5 @@
 # Progress
 
-# Structure of the project
-
-The application consists of two main folders...
-
-`src` - files within this folder get transpiled or compiled (because Electron can't use them directly).
-
-`app` - contains all static assets which don't need any pre-processing. Put here images, CSSes, HTMLs, etc.
-
-The build process compiles the content of the `src` folder and puts it into the `app` folder, so after the build has finished, your `app` folder contains the full, runnable application.
-
-Treat `src` and `app` folders like two halves of one bigger thing.
-
-The drawback of this design is that `app` folder contains some files which should be git-ignored and some which shouldn't (see `.gitignore` file). But this two-folders split makes development builds much, much faster.
-
 # Development
 
 ## Starting the app

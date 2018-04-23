@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 // import { routeCodes } from 'routes';
-import { connect } from 'react-redux';
-import * as types from 'src/actions/types';
 // import RaisedButton from 'material-ui/RaisedButton';
 // import FlatButton from 'material-ui/FlatButton';
 // import IconChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
-import Featured from 'src/components/Featured';
 
-@connect(state => ({
-  user: state.authReducer[types.SESSION_USER]
-}))
 export default class Home extends Component {
 
     static propTypes = {
-      user: t.object,
-      data: t.array
+      user: t.object
     }
 
     static defaultProps = {
-      user: null,
-      data: []
+      user: null
     }
 
     constructor (props) {
@@ -50,7 +42,6 @@ export default class Home extends Component {
     render () {
       return (
         <article className="h__section h__section--home">
-          <Featured data={ this.props.data } />
           {
             this.props.user &&
             <div>

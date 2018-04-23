@@ -14,39 +14,8 @@ export const withTransition = (WrappedComponent = () => null, config = {}) =>
   class WithTransition extends Component {
 
     static propTypes = {
-      navigate: t.func.isRequired,
-      onTransition: t.func
+      navigate: t.func.isRequired
     }
-
-    static defaultProps = {
-      onTransition: null
-    }
-
-    state = { animating: false }
-
-    /**
-     * @description
-     * On animate bubble effect
-     *
-     * @param  {Object} e
-     * @return {Function}
-     * @public
-     */
-    onAnimate = e => {
-      e.persist();
-      if (this.props.onTransition) this.props.onTransition();
-
-      return !this.state.animating &&
-        this.setState({ animating: true }, () => {
-          const span = document.createElement('span');
-          span.className = 'h__bubble';
-          span.style.top = `${e.nativeEvent.offsetY }px`;
-          span.style.left = `${e.nativeEvent.offsetX }px`;
-          e.target.appendChild(span);
-          return setTimeout(() => this.setState({ animating: false }, () => e.target.removeChild(span)), 650);
-        });
-    }
-
 
     /**
      * @description
@@ -64,7 +33,14 @@ export const withTransition = (WrappedComponent = () => null, config = {}) =>
         ...props,
         to: 'modal',
         meta: {
-          from: { top, right, bottom, left, width, height }
+          from: {
+            top,
+            right,
+            bottom,
+            left: left - 200,
+            width,
+            height
+          }
         }
       });
     }
@@ -73,7 +49,6 @@ export const withTransition = (WrappedComponent = () => null, config = {}) =>
       return (
         <div
           className={ config.transition.className }
-          onClick={ this.onAnimate }
           ref={ el => this.component = el }>
           <WrappedComponent
             { ...this.props }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 import { augmentComponent } from 'react-augment';
-import HOC from 'src/lib/decorators';
+import { withForm } from 'src/lib/decorators';
 // import Utils from 'src/lib/utils';
 // import TextField from 'material-ui/TextField';
 // import RaisedButton from 'material-ui/RaisedButton';
@@ -18,7 +18,7 @@ const MODEL = {
 };
 
 @augmentComponent([
-  HOC.withForm
+  withForm
 ], MODEL)
 export default class FormProject extends Component {
 

@@ -4,8 +4,7 @@ import history from './history';
 
 import App from 'src/containers/core/App';
 
-// import Home from 'src/containers/views/Home';
-import Projects from 'src/containers/views/Projects';
+import { Projects } from 'src/containers/views';
 
 const publicPath = '/';
 

@@ -3,18 +3,12 @@ import t from 'prop-types';
 import classNames from 'classnames';
 import { routeCodes } from 'src/routes';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ActionCreators } from 'src/actions';
+import { AnimateBubble } from 'src/components/animate';
 
-@connect(state => state, dispatch => ({
-  actions: bindActionCreators(ActionCreators, dispatch)
-}))
 export default class Sidebar extends Component {
 
     static propTypes = {
-      path: t.string.isRequired,
-      actions: t.object.isRequired
+      path: t.string.isRequired
     }
 
     constructor (props) {
@@ -39,34 +33,23 @@ export default class Sidebar extends Component {
      */
     getActiveRoute = path => Object.keys(this.routes).indexOf(path)
 
-    /**
-     * @description
-     * On logout fn
-     *
-     * @return {Function}
-     * @private
-     */
-    onLogout = () => this.props.actions.logout()
-
     render () {
       return (
         <section className="h__sidemenu">
           <ul className="h__sidemenu__list">
             {
               Object.keys(this.routes).map((route, index) => (
-                <li
-                  className={ classNames({
-                    'h__sidemenu__list-item': true,
-                    'active': this.state.active === index
-                  }) }
-                  key={ index }>
-                  <NavLink to={ route } >{ this.routes[route] }</NavLink>
-                </li>
+                <AnimateBubble key={ index }>
+                  <li
+                    className={ classNames({
+                      'h__sidemenu__list-item': true,
+                      'active': this.state.active === index
+                    }) }>
+                    <NavLink to={ route } >{ this.routes[route] }</NavLink>
+                  </li>
+                </AnimateBubble>
               ))
             }
-            <li className="h__sidemenu__list-item">
-              <button type="button" onClick={ this.onLogout }>Sign out</button>
-            </li>
           </ul>
         </section>
       );
