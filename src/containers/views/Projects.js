@@ -13,6 +13,8 @@ import { FormProject } from 'src/components/form';
 import { Create } from 'src/components';
 import { AnimateRipple } from 'src/components/animate';
 
+import Snackbar from 'material-ui/Snackbar';
+
 @connect(state => ({
   Auth: state.authReducer[types.AUTH],
   Projects: state.projectsReducer[types.PROJECTS],
@@ -30,6 +32,7 @@ export default class Projects extends Component {
     static propTypes = {
       actions: t.object.isRequired,
       history: t.object.isRequired,
+      onCreateProject: t.func.isRequired,
       Projects: t.object,
       Transition: t.object.isRequired,
       Auth: t.object.isRequired
@@ -39,7 +42,21 @@ export default class Projects extends Component {
       Projects: null
     }
 
+    state = {
+      create: false,
+      snack: false
+    }
+
     onTransition = () => this.props.actions.setTransition({ active: true })
+
+    onCreate = () => !this.state.create && this.setState({ create: true })
+
+    onCancel = () => this.setState({ create: false })
+
+    onSubmit = project =>
+      this.setState({ create: false }, () =>
+        this.props.onCreateProject(project)
+          .then(() => this.setState({ snack: true })))
 
     render () {
       const classes = classNames({
@@ -51,10 +68,21 @@ export default class Projects extends Component {
         <article className={ classes }>
           {
             this.props.Auth.data &&
-            <Create type="Project">
-              <FormProject onSubmit={ val => console.log('submit', val) } />
+            <Create
+              onCreate={ this.onCreate }
+              open={ this.state.create }
+              type="Project">
+              <FormProject
+                onSubmit={ this.onSubmit }
+                onCancel={ this.onCancel } />
             </Create>
           }
+
+          <Snackbar
+            open={ this.state.snack }
+            message="Project created"
+            autoHideDuration={ 4000 }
+            onRequestClose={ () => this.setState({ snack: false }) } />
 
           <div className="h__list">
             {

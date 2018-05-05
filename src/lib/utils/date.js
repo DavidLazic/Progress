@@ -13,5 +13,5 @@ export const date = {
     const end = date.fromDate(endTime);
     return end.diff(start, 'months', true) + 1;
   },
-  format: day => moment(day).format('MM/YY')
+  format: day => moment(day).format('MMM YYYY')
 };

@@ -1,7 +1,7 @@
 .h__article {
   position: relative;
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 60px);
   flex-direction: column;
   background: $site-background;
 

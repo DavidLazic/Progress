@@ -37,7 +37,7 @@ export const withTransition = (WrappedComponent = () => null, { transition }) =>
             top,
             right,
             bottom,
-            left: left - 200,
+            left,
             width,
             height
           }

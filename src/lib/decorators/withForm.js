@@ -44,7 +44,7 @@ export const withForm = (WrappedComponent = () => null, { form } = {}) =>
         form: {
           ...this.state.form,
           [event.target.name]: event.target.value,
-          ...(secondary ? { [secondary.target.name]: secondary.target.value } : {})
+          ...(secondary && secondary.target ? { [secondary.target.name]: secondary.target.value } : {})
         }
       })
 

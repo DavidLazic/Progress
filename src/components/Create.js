@@ -7,6 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 export default class Create extends Component {
 
   static propTypes = {
+    onCreate: t.func.isRequired,
+    open: t.bool.isRequired,
     type: t.string.isRequired,
     children: t.object
   }
@@ -15,27 +17,18 @@ export default class Create extends Component {
     children: null
   }
 
-  state = {
-    type: this.props.type,
-    active: false
-  }
-
-  onCreate = () => !this.state.active && this.setState({ active: true })
-
-  onCancel = () => this.setState({ active: false })
-
   render () {
     return (
       <div className="h__create">
         <Dialog
           title={ `Create ${this.props.type}` }
-          open={ this.state.active }
+          open={ this.props.open }
           autoScrollBodyContent={ true }>
-          { React.cloneElement(this.props.children, { onCancel: this.onCancel }) }
+          { this.props.children }
         </Dialog>
 
         <RaisedButton
-          onClick={ this.onCreate }
+          onClick={ this.props.onCreate }
           label="Create"
           type="button"
           secondary />
