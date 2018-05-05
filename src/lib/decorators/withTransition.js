@@ -10,7 +10,7 @@ import t from 'prop-types';
  * @return {Object}
  * @public
  */
-export const withTransition = (WrappedComponent = () => null, config = {}) =>
+export const withTransition = (WrappedComponent = () => null, { transition }) =>
   class WithTransition extends Component {
 
     static propTypes = {
@@ -31,7 +31,7 @@ export const withTransition = (WrappedComponent = () => null, config = {}) =>
 
       return this.props.navigate(route, {
         ...props,
-        to: 'modal',
+        to: 'transition',
         meta: {
           from: {
             top,
@@ -48,7 +48,7 @@ export const withTransition = (WrappedComponent = () => null, config = {}) =>
     render () {
       return (
         <div
-          className={ config.transition.className }
+          className={ transition && transition.className || '' }
           ref={ el => this.component = el }>
           <WrappedComponent
             { ...this.props }

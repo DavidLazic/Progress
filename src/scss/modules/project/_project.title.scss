@@ -18,7 +18,7 @@
       background-color: rgba($site-highlight-dark, 1);
     }
 
-    > span:not(.h__bubble) {
+    > span:not(.h__ripple) {
       @include transition(all, 0.325s, $transition-standard, 0.12s);
       padding: 0 10px;
       width: calc(100% / 1.4);

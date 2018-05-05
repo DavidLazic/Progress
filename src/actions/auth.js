@@ -1,5 +1,5 @@
 import * as types from 'src/actions/types';
 
-export function login (props) {
+export function setAuth (props) {
   return { type: types.AUTH, payload: props };
 }

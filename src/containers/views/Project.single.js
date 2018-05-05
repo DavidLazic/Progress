@@ -6,10 +6,11 @@ import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
 import { withNavigation } from 'src/lib/decorators';
 import classNames from 'classnames';
-import Utils from 'src/lib/utils';
+import { date } from 'src/lib/utils';
 import { routeCodes } from 'src/routes';
 import { ProjectItem } from 'src/components/project';
-// import IconBack from 'material-ui/svg-icons/navigation/arrow-back';
+
+import IconBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 @augmentComponent([
   withNavigation
@@ -39,7 +40,7 @@ export default class Project extends Component {
     componentDidMount = () => setTimeout(() => this.setState({ active: true }), 0)
 
     onBack = () => this.setState({ active: false }, () => {
-      this.props.actions.setModal({ active: false });
+      this.props.actions.setTransition({ active: false });
       return this.props.navigateDebounce(routeCodes.PROJECTS, null, 475);
     })
 
@@ -51,40 +52,40 @@ export default class Project extends Component {
      * @return {Number}
      * @private
      */
-    getDuration = project => Utils.date.getDuration(project.startTime, project.endTime)
+    getDuration = project => date.getDuration(project.startTime, project.endTime)
 
     render () {
-      const project = this.props.location.state.data;
+      const { id, data } = this.props.location.state;
       const classes = classNames({
-        'h__modal': true,
-        'h__modal--project': true,
-        'h__modal--even': project.index % 2 !== 0,
+        'h__transition': true,
+        'h__transition--project': true,
         'active': this.state.active
       });
 
       return (
         <div className={ classes } style={ this.props.position }>
-          <span className="h__modal-back" onClick={ this.onBack } >
-            {/* <IconBack /> */}
+          <span className="h__transition-back" onClick={ this.onBack } >
+            <IconBack />
           </span>
 
-          <div className="h__modal-inner">
+          <div className="h__transition-inner">
             <ProjectItem
-              modal={ true }
-              project={ project } />
+              transition={ true }
+              id={ id }
+              project={ data } />
 
             <div className="h__project__months">
               {
-                this.getDuration(project) > 1 ?
-                  `${Utils.date.getMonthName(project.startTime)} ${Utils.date.getYear(project.startTime)} - ${Utils.date.getMonthName(project.endTime)} ${Utils.date.getYear(project.endTime)}` :
-                  `${Utils.date.getMonthName(project.startTime)}`
+                this.getDuration(data) > 1 ?
+                  `${date.getMonthName(data.startTime)} ${date.getYear(data.startTime)} - ${date.getMonthName(data.endTime)} ${date.getYear(data.endTime)}` :
+                  `${date.getMonthName(data.startTime)}`
               }
             </div>
 
             <div className="h__project__duration">
-              { this.getDuration(project) }
+              { this.getDuration(data) }
               <div>
-                { `month${this.getDuration(project) > 1 && 's' || ''}` }
+                { `month${this.getDuration(data) > 1 && 's' || ''}` }
               </div>
             </div>
           </div>

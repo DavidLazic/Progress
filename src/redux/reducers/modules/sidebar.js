@@ -3,7 +3,7 @@ import * as types from 'src/actions/types';
 
 const initState = {
   [types.SIDEBAR]: {
-    active: false
+    active: true
   }
 };
 

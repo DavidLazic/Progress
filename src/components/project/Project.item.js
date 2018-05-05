@@ -3,7 +3,7 @@ import t from 'prop-types';
 import { augmentComponent } from 'react-augment';
 import { withNavigation, withTransition } from 'src/lib/decorators';
 import { routeCodes } from 'src/routes';
-import Utils from 'src/lib/utils';
+import { date } from 'src/lib/utils';
 
 @augmentComponent([
   withNavigation,
@@ -14,15 +14,16 @@ import Utils from 'src/lib/utils';
 export default class ProjectItem extends Component {
 
     static propTypes = {
+      id: t.string.isRequired,
       project: t.object.isRequired,
       modifierClass: t.string,
-      modal: t.bool,
+      transition: t.bool,
       onChange: t.func.isRequired
     }
 
     static defaultProps = {
       modifierClass: '',
-      modal: false
+      transition: false
     }
 
     /**
@@ -32,7 +33,7 @@ export default class ProjectItem extends Component {
      * @return {Number}
      * @private
      */
-    getDuration = () => Utils.date.getDuration(this.props.project.startTime, this.props.project.endTime)
+    getDuration = () => date.getDuration(this.props.project.startTime, this.props.project.endTime)
 
     /**
      * @description
@@ -42,8 +43,9 @@ export default class ProjectItem extends Component {
      * @return {Function}
      * @private
      */
-    onSelect = () => !this.props.modal &&
-        this.props.onChange(`${routeCodes.PROJECTS}/${this.props.project.id}`, {
+    onSelect = () => !this.props.transition &&
+        this.props.onChange(`${routeCodes.PROJECTS}/${this.props.id}`, {
+          id: this.props.id,
           data: this.props.project
         })
 
@@ -53,8 +55,7 @@ export default class ProjectItem extends Component {
       return (
         <div
           className={ `h__project ${this.props.modifierClass}` }
-          onClick={ this.onSelect }
-          data-letter={ project.name.charAt(0) }>
+          onClick={ this.onSelect }>
 
           <div className="h__project__title">
             <span>

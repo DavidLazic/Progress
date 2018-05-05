@@ -1,5 +1,5 @@
-import AnimateBubble from './Animate.bubble';
+import AnimateRipple from './Animate.ripple';
 
 export {
-  AnimateBubble
+  AnimateRipple
 };

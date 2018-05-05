@@ -5,6 +5,7 @@ const initState = {
   [types.AUTH]: {
     data: null,
     loading: false,
+    active: false,
     error: null
   }
 };

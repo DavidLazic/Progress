@@ -9,11 +9,14 @@ import { withSocket } from 'src/lib/decorators';
 import refs from 'src/constants/refs';
 import * as types from 'src/actions/types';
 import { ProjectItem } from 'src/components/project';
-import { AnimateBubble } from 'src/components/animate';
+import { FormProject } from 'src/components/form';
+import { Create } from 'src/components';
+import { AnimateRipple } from 'src/components/animate';
 
 @connect(state => ({
+  Auth: state.authReducer[types.AUTH],
   Projects: state.projectsReducer[types.PROJECTS],
-  Modal: state.modalReducer[types.MODAL]
+  Transition: state.transitionReducer[types.TRANSITION]
 }), dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
@@ -28,34 +31,45 @@ export default class Projects extends Component {
       actions: t.object.isRequired,
       history: t.object.isRequired,
       Projects: t.object,
-      Modal: t.object
+      Transition: t.object.isRequired,
+      Auth: t.object.isRequired
     }
 
     static defaultProps = {
-      Projects: null,
-      Modal: null
+      Projects: null
     }
 
-    onTransition = () => this.props.actions.setModal({ active: true })
+    onTransition = () => this.props.actions.setTransition({ active: true })
 
     render () {
       const classes = classNames({
         h__article: true,
-        active: this.props.Modal.active
+        active: this.props.Transition.active
       });
 
       return (
         <article className={ classes }>
+          {
+            this.props.Auth.data &&
+            <Create type="Project">
+              <FormProject onSubmit={ val => console.log('submit', val) } />
+            </Create>
+          }
+
           <div className="h__list">
             {
               this.props.Projects.data &&
               Object.keys(this.props.Projects.data).map((key, index) => (
-                <AnimateBubble key={ key }>
+                <AnimateRipple key={ key }>
                   <ProjectItem
+                    id={ key }
                     history={ this.props.history }
                     onTransition={ this.onTransition }
-                    project={ { ...this.props.Projects.data[key], index } } />
-                </AnimateBubble>
+                    project={ {
+                      index,
+                      ...this.props.Projects.data[key]
+                    } } />
+                </AnimateRipple>
               ))
             }
           </div>

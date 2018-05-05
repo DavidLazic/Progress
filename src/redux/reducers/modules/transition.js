@@ -2,11 +2,11 @@ import { createReducer, createHandlers } from 'src/redux';
 import * as types from 'src/actions/types';
 
 const initState = {
-  [types.MODAL]: {
+  [types.TRANSITION]: {
     active: false
   }
 };
 
 export default {
-  modalReducer: createReducer(initState, createHandlers(Object.keys(initState)))
+  transitionReducer: createReducer(initState, createHandlers(Object.keys(initState)))
 };

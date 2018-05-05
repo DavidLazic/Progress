@@ -20,20 +20,6 @@
     cursor: default;
   }
 
-  &:before {
-    @include transition(opacity, 0.3s, $transition-ease-in, 0.12s);
-    @include centerY();
-    content: attr(data-letter);
-    font-family: $font-saira;
-    font-size: 80vw;
-    z-index: 2;
-    opacity: 0.2;
-
-    .h__modal.active & {
-      opacity: 0;
-    }
-  }
-
   &__months {
     font-size: 20px;
     text-transform: capitalize;

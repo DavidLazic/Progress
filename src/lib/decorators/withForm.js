@@ -10,7 +10,7 @@ import t from 'prop-types';
  * @return {Object}
  * @public
  */
-export const withForm = (WrappedComponent = () => null, model = {}) =>
+export const withForm = (WrappedComponent = () => null, { form } = {}) =>
   class WithForm extends Component {
 
     static propTypes = {
@@ -26,8 +26,8 @@ export const withForm = (WrappedComponent = () => null, model = {}) =>
 
     componentWillMount = () =>
       this.setState({
-        form: Object.keys(this.props.prepopulate || model).reduce((acc, key) =>
-          Object.assign(acc, { [key]: this.props.prepopulate ? this.props.prepopulate[key] : '' }), {})
+        form: Object.keys(this.props.prepopulate || form).reduce((acc, key) =>
+          Object.assign(acc, { [key]: this.props.prepopulate ? this.props.prepopulate[key] : form[key].values }), {})
       })
 
     /**
@@ -35,14 +35,16 @@ export const withForm = (WrappedComponent = () => null, model = {}) =>
      * Set current field value.
      *
      * @param {Object} event
+     * @param {Object} secondary
      * @return {Function}
      * @private
      */
-    setValue = event =>
+    setValue = (event, secondary) =>
       this.setState({
         form: {
           ...this.state.form,
-          [event.target.name]: event.target.value
+          [event.target.name]: event.target.value,
+          ...(secondary ? { [secondary.target.name]: secondary.target.value } : {})
         }
       })
 

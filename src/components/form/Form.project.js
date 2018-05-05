@@ -2,38 +2,44 @@ import React, { Component } from 'react';
 import t from 'prop-types';
 import { augmentComponent } from 'react-augment';
 import { withForm } from 'src/lib/decorators';
-// import Utils from 'src/lib/utils';
-// import TextField from 'material-ui/TextField';
-// import RaisedButton from 'material-ui/RaisedButton';
-// import MonthPickerInput from 'react-month-picker-input';
+import { date } from 'src/lib/utils';
+import Dates from './fragments/Fragment.dates';
+import Tags from './fragments/Fragment.tags';
+
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const MODEL = {
-  name: { label: 'Project Name' },
-  url: { label: 'Project URL' },
-  description: { label: 'Project Description' },
-  content: { label: 'Project Content', props: { multiLine: true, rows: 10 } },
-  tags: { label: 'Project Tags' },
-  startTime: { label: 'Start Date', date: true },
-  endTime: { label: 'End Date', date: true }
+  title: { label: 'Title', values: '', type: 'TextField' },
+  subtitle: { label: 'Subtitle', values: '', type: 'TextField' },
+  url: { label: 'URL', values: '', type: 'TextField' },
+  description: { label: 'Description', values: '', type: 'TextField' },
+  content: { label: 'Content', values: '', props: { multiLine: true, rows: 10 }, type: 'TextField' },
+  tags: { label: 'Tags', tags: true, values: {}, type: 'Tags' },
+  periods: { values: {}, disabled: true },
+  frames: { values: [], date: true, type: 'Dates' }
 };
 
 @augmentComponent([
   withForm
-], MODEL)
+], { form: MODEL })
 export default class FormProject extends Component {
 
     static propTypes = {
-      // prepopulate: t.object,
+      prepopulate: t.object,
       onSubmit: t.func.isRequired,
-      // setValue: t.func.isRequired,
-      // data: t.object,
+      onCancel: t.func,
+      setValue: t.func.isRequired,
+      data: t.object,
       error: t.object
     }
 
     static defaultProps = {
-      // data: null,
-      error: null
-      // prepopulate: null
+      data: null,
+      error: null,
+      prepopulate: null,
+      onCancel: null
     }
 
     onSubmit = event => {
@@ -42,44 +48,97 @@ export default class FormProject extends Component {
       return this.props.onSubmit(event);
     }
 
+    getFrames = ({ start, end, key, idx }) =>
+      this.props.data[key].map((item, i) =>
+        (i === idx) ? { start, end } : item)
+
+    setDates = ({ start, end, period, key, idx }) =>
+      this.props.setValue({
+        target: {
+          name: key,
+          value: this.props.data[key].length
+            ? this.getFrames({ start, end, idx, key })
+            : [{ start, end }] }
+      }, {
+        target: {
+          name: 'periods',
+          value: { ...this.props.data.periods, [period]: true }
+        }
+      })
+
+    onAddFrame = () =>
+      this.props.setValue({
+        target: {
+          name: 'frames',
+          value: [...this.props.data.frames, { start: date.toDate(new Date()), end: date.toDate(new Date()) }]
+        }
+      })
+
+    renderTextField = ({ key, index }) => (
+      <TextField
+        key={ index }
+        name={ key }
+        className="form__field"
+        floatingLabelText={ MODEL[key].label }
+        value={ this.props.data[key] }
+        onChange={ this.props.setValue }
+        { ...MODEL[key].props } />
+    )
+
+    renderDates = ({ key }) =>
+      this.props.data[key].map((value, i) => (
+        <Dates
+          onChange={ props => this.setDates({ ...props, key }) }
+          key={ `${key}-${i}` }
+          name={ key }
+          frame={ value }
+          index={ i } />
+      ))
+
+    renderTags = ({ key, index }) => (
+      <Tags
+        key={ index }
+        name={ key }
+        label={ MODEL[key].label }
+        tags={ this.props.data[key] }
+        onChange={ this.props.setValue } />
+    )
+
     render () {
       return (
         <form className="form" onSubmit={ this.onSubmit }>
           {
-            // Object.keys(MODEL).map((key, index) => (
-            //   !MODEL[key].date ?
-
-            //     <TextField
-            //       key={ index }
-            //       name={ key }
-            //       className="form__field"
-            //       floatingLabelText={ MODEL[key].label }
-            //       value={ this.props.data[key] }
-            //       onChange={ this.props.setValue }
-            //       { ...MODEL[key].props } /> :
-
-            //     <div className="calendar" key={ index }>
-            //       <div className="calendar__label">{ `${MODEL[key].label}:` }</div>
-            //       <MonthPickerInput
-            //         year={ this.props.data[key] && Utils.date.getYear(this.props.data[key]) || null }
-            //         month={ this.props.data[key] && Utils.date.getMonth(this.props.data[key]) || null }
-            //         onChange={ selected => this.props.setValue({
-            //           target: { name: key, value: Utils.date.toUnix(selected) }
-            //         }) } />
-            //     </div>
-
-            // ))
+            Object.keys(MODEL).map((key, index) =>
+              !MODEL[key].disabled &&
+              this[`render${MODEL[key].type}`]({ key, index })
+            )
           }
 
-          {
-            // <RaisedButton
-            // className="form__submit"
-            // fullWidth={ true }
-            // label={ this.props.prepopulate && 'Save' || 'Create' }
-            // type="submit"
-            // backgroundColor="#483d8b"
-            // onClick={ this.onSubmit } />
-          }
+          <div className="form__frame">
+            <RaisedButton
+              className="form__submit"
+              label="Add Frame"
+              type="button"
+              backgroundColor="#483d8b"
+              onClick={ this.onAddFrame } />
+          </div>
+
+          <div className="form__actions">
+            {
+              this.props.onCancel &&
+              <FlatButton
+                onClick={ this.props.onCancel }
+                label="Cancel"
+                type="button" />
+            }
+
+            <RaisedButton
+              className="form__submit"
+              label={ this.props.prepopulate && 'Save' || 'Create' }
+              type="submit"
+              backgroundColor="#483d8b"
+              onClick={ this.onSubmit } />
+          </div>
 
           {
             this.props.error &&
