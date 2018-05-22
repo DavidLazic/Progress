@@ -10,11 +10,11 @@ import { routeCodes } from 'src/routes';
 import firebase from 'src/firebase';
 import * as types from 'src/actions/types';
 
-import { Sidebar, Header, Login } from 'src/components';
+import { Header, Login } from 'src/components';
 import { Project } from 'src/containers/views';
 
 @connect(state => ({
-  Sidebar: state.sidebarReducer[types.SIDEBAR]
+  Navbar: state.navbarReducer[types.NAVBAR]
 }), dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
@@ -24,7 +24,7 @@ class App extends Component {
       location: t.object,
       children: t.object,
       actions: t.object.isRequired,
-      Sidebar: t.object.isRequired
+      Navbar: t.object.isRequired
     }
 
     static defaultProps = {
@@ -50,11 +50,11 @@ class App extends Component {
 
           <div className={ classNames({
             'h__article': true,
-            'h__article--menu-open': this.props.Sidebar.active
+            'h__article--menu-open': this.props.Navbar.active
           }) }>
-            <Sidebar path={ this.props.location.pathname } />
+            {/* <Navbar path={ this.props.location.pathname } /> */}
 
-            <section className="h__pusher">
+            <Fragment>
               { this.props.children }
 
               {
@@ -65,7 +65,7 @@ class App extends Component {
                     <Project { ...props } position={ position } />
                   } />
               }
-            </section>
+            </Fragment>
           </div>
         </Fragment>
       );

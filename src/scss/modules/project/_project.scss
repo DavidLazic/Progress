@@ -10,7 +10,7 @@
   font-family: $font-montserrat;
   background: url('images/theme_winter.jpeg') center no-repeat;
   background-size: cover;
-  color: $site-font-secondary;
+  color: $color-font-secondary;
   cursor: pointer;
 
   .h__modal.active & {
@@ -23,7 +23,7 @@
   &__months {
     font-size: 20px;
     text-transform: capitalize;
-    color: $site-font-secondary;
+    color: $color-font-secondary;
   }
 
   &__border {
@@ -39,12 +39,12 @@
 
     &:before {
       left: 0;
-      background: $site-border-primary;
+      background: $color-border-primary;
     }
 
     &:after {
       right: 0;
-      background: $site-border-secondary;
+      background: $color-border-secondary;
     }
   }
 }

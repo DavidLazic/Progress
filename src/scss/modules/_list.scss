@@ -4,22 +4,35 @@
   &-item {
     position: relative;
     overflow: hidden;
-
-    &--projects {
-    }
   }
-}
 
-@media screen and (min-width: 680px) {
-  .h__list {
-    display: grid;
-    grid-gap: 5px;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-template-rows: repeat(2, 100px);
+  &--honeycomb {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 60%;
 
-    &-item {
-      // width: 30vw;
-      height: 30vw;
+    &:before {
+      position: absolute;
+      display: block;
+      top: 50%;
+      left: 50%;
+      height: 150%;
+      width: 150%;
+      z-index: 1;
+      -webkit-transform: translate3d(-50%, -50%, 0);
+      transform: translate3d(-50%, -50%, 0);
+      opacity: 0.9;
+      background-image: -webkit-radial-gradient(closest-side, rgba(23, 29, 37, 0), $color-secondary);
+      background-image: radial-gradient(closest-side, rgba(23, 29, 37, 0), $color-secondary);
+      pointer-events: none;
+      content: '';
+    }
+
+    &:after {
+      display: block;
+      clear: both;
+      content: '';
     }
   }
 }

@@ -8,10 +8,10 @@ import { augmentComponent } from 'react-augment';
 import { withSocket } from 'src/lib/decorators';
 import refs from 'src/constants/refs';
 import * as types from 'src/actions/types';
-import { ProjectItem } from 'src/components/project';
+// import { ProjectItem } from 'src/components/project';
 import { FormProject } from 'src/components/form';
 import { Create } from 'src/components';
-import { AnimateRipple } from 'src/components/animate';
+// import { AnimateRipple } from 'src/components/animate';
 
 import Snackbar from 'material-ui/Snackbar';
 
@@ -31,7 +31,7 @@ export default class Projects extends Component {
 
     static propTypes = {
       actions: t.object.isRequired,
-      history: t.object.isRequired,
+      // history: t.object.isRequired,
       onCreateProject: t.func.isRequired,
       Projects: t.object,
       Transition: t.object.isRequired,
@@ -54,9 +54,10 @@ export default class Projects extends Component {
     onCancel = () => this.setState({ create: false })
 
     onSubmit = project =>
-      this.setState({ create: false }, () =>
-        this.props.onCreateProject(project)
-          .then(() => this.setState({ snack: true })))
+      this.setState({ create: false }, async () => {
+        await this.props.onCreateProject(project);
+        this.setState({ snack: true });
+      })
 
     render () {
       const classes = classNames({
@@ -84,23 +85,29 @@ export default class Projects extends Component {
             autoHideDuration={ 4000 }
             onRequestClose={ () => this.setState({ snack: false }) } />
 
-          <div className="h__list">
+          <ul className="h__list h__list--honeycomb">
             {
               this.props.Projects.data &&
-              Object.keys(this.props.Projects.data).map((key, index) => (
-                <AnimateRipple key={ key }>
-                  <ProjectItem
-                    id={ key }
-                    history={ this.props.history }
-                    onTransition={ this.onTransition }
-                    project={ {
-                      index,
-                      ...this.props.Projects.data[key]
-                    } } />
-                </AnimateRipple>
+              Object.keys(this.props.Projects.data).map(key => (
+                <li key={ key } className="hex">
+                  <div className="hex__wrapper">
+                    {
+                      // <AnimateRipple key={ key }>
+                      //   <ProjectItem
+                      //     id={ key }
+                      //     history={ this.props.history }
+                      //     onTransition={ this.onTransition }
+                      //     project={ {
+                      //       index,
+                      //       ...this.props.Projects.data[key]
+                      //     } } />
+                      // </AnimateRipple>
+                    }
+                  </div>
+                </li>
               ))
             }
-          </div>
+          </ul>
         </article>
       );
     }

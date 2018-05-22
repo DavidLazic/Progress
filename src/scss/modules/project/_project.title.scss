@@ -10,19 +10,19 @@
     font-size: 22px;
     font-family: $font-saira;
     text-transform: uppercase;
-    background-color: rgba($site-highlight, 1);
-    color: $site-font-primary;
+    background-color: rgba($color-highlight, 1);
+    color: $color-font-primary;
 
     .h__list-item--projects:nth-child(even) &,
     .h__modal--even & {
-      background-color: rgba($site-highlight-dark, 1);
+      background-color: rgba($color-highlight-dark, 1);
     }
 
     > span:not(.h__ripple) {
       @include transition(all, 0.325s, $transition-standard, 0.12s);
       padding: 0 10px;
       width: calc(100% / 1.4);
-      background-color: rgba($site-highlight, 0);
+      background-color: rgba($color-highlight, 0);
     }
 
     &:before {
@@ -35,18 +35,18 @@
       z-index: 50;
       width: 25%;
       height: 4px;
-      background: linear-gradient(to right, $site-border-primary, $site-border-secondary);
+      background: linear-gradient(to right, $color-border-primary, $color-border-secondary);
     }
 
     .h__modal.active & {
-      background-color: rgba($site-highlight, 0);
+      background-color: rgba($color-highlight, 0);
       transition-delay: 0.12s;
       -webkit-transition-delay: 0.12s;
 
       > span {
         padding: 10px;
         font-size: 26px;
-        background-color: rgba($site-highlight, 0.5);
+        background-color: rgba($color-highlight, 0.5);
       }
     }
   }

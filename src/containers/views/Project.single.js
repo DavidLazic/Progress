@@ -32,10 +32,7 @@ export default class Project extends Component {
       position: null
     }
 
-    constructor (props) {
-      super(props);
-      this.state = { active: false };
-    }
+    state = { active: false }
 
     componentDidMount = () => setTimeout(() => this.setState({ active: true }), 0)
 
@@ -76,9 +73,9 @@ export default class Project extends Component {
 
             <div className="h__project__months">
               {
-                this.getDuration(data) > 1 ?
-                  `${date.getMonthName(data.startTime)} ${date.getYear(data.startTime)} - ${date.getMonthName(data.endTime)} ${date.getYear(data.endTime)}` :
-                  `${date.getMonthName(data.startTime)}`
+                this.getDuration(data) > 1
+                  ? `${date.getMonthName(data.startTime)} ${date.getYear(data.startTime)} - ${date.getMonthName(data.endTime)} ${date.getYear(data.endTime)}`
+                  : `${date.getMonthName(data.startTime)}`
               }
             </div>
 

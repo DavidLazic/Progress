@@ -1,11 +1,11 @@
 import Header from './Header';
-import Sidebar from './Sidebar';
+import Navbar from './Navbar';
 import Login from './Login';
 import Create from './Create';
 
 export {
   Header,
-  Sidebar,
+  Navbar,
   Login,
   Create
 };

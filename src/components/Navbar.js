@@ -5,7 +5,7 @@ import { routeCodes } from 'src/routes';
 import { NavLink } from 'react-router-dom';
 import { AnimateRipple } from 'src/components/animate';
 
-export default class Sidebar extends Component {
+export default class Navbar extends Component {
 
     static propTypes = {
       path: t.string.isRequired
@@ -35,14 +35,14 @@ export default class Sidebar extends Component {
 
     render () {
       return (
-        <section className="h__sidebar">
-          <ul className="h__sidebar__list">
+        <section className="h__navbar">
+          <ul className="h__navbar__list">
             {
               Object.keys(this.routes).map((route, index) => (
                 <li
                   key={ index }
                   className={ classNames({
-                    'h__sidebar__list-item': true,
+                    'h__navbar__list-item': true,
                     'active': this.state.active === index
                   }) }>
                   <AnimateRipple>

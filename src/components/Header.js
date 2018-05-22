@@ -18,7 +18,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
   withSocket
 ])
 @connect(state => ({
-  Sidebar: state.sidebarReducer[types.SIDEBAR],
+  Navbar: state.navbarReducer[types.NAVBAR],
   Auth: state.authReducer[types.AUTH]
 }), dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
@@ -27,12 +27,12 @@ export default class Header extends Component {
 
     static propTypes = {
       actions: t.object.isRequired,
-      Sidebar: t.object.isRequired,
+      Navbar: t.object.isRequired,
       Auth: t.object.isRequired,
       onLogout: t.func.isRequired
     }
 
-    onSidebarToggle = () => this.props.actions.setSidebar({ active: !this.props.Sidebar.active })
+    onNavbarToggle = () => this.props.actions.setNavbar({ active: !this.props.Navbar.active })
 
     onLogin = () => !this.props.Auth.active && this.props.actions.setAuth({ active: true })
 
@@ -40,7 +40,7 @@ export default class Header extends Component {
       return (
         <div className="h__header">
 
-          <IconButton onClick={ this.onSidebarToggle }>
+          <IconButton onClick={ this.onNavbarToggle }>
             <Menu className="h__icon h__icon--menu" />
           </IconButton>
 
