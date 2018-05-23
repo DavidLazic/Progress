@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
 import { withNavigation, withTransition } from 'src/lib/decorators';
 import { routeCodes } from 'src/routes';
 import { date } from 'src/lib/utils';
 
+@connect(state => state, dispatch => ({
+  actions: bindActionCreators(ActionCreators, dispatch)
+}))
 @augmentComponent([
   withNavigation,
   withTransition
@@ -18,7 +24,8 @@ export default class ProjectItem extends Component {
       project: t.object.isRequired,
       modifierClass: t.string,
       transition: t.bool,
-      onChange: t.func.isRequired
+      onChange: t.func.isRequired,
+      actions: t.object.isRequired
     }
 
     static defaultProps = {
@@ -43,11 +50,13 @@ export default class ProjectItem extends Component {
      * @return {Function}
      * @private
      */
-    onSelect = () => !this.props.transition &&
-        this.props.onChange(`${routeCodes.PROJECTS}/${this.props.id}`, {
-          id: this.props.id,
-          data: this.props.project
-        })
+    onSelect = () => !this.props.transition && (
+      this.props.actions.setTransition({ active: true, index: this.props.project.index }),
+      this.props.onChange(`${routeCodes.PROJECTS}/${this.props.id}`, {
+        id: this.props.id,
+        data: this.props.project
+      })
+    )
 
     render () {
       const { project } = this.props;

@@ -1,6 +1,8 @@
 .h__ripple {
   position: relative;
   overflow: hidden;
+  height: 100%;
+  width: 100%;
 
   &__container {
     position: absolute;
@@ -17,6 +19,7 @@
       -webkit-transform: scale(0);
       animation: ripple ease-out 0.75s forwards;
       -webkit-animation: ripple ease-out 0.75s forwards;
+      z-index: 1;
       border-radius: 100%;
       background-color: #fff;
     }

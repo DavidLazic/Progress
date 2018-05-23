@@ -37,8 +37,8 @@ export default class Project extends Component {
     componentDidMount = () => setTimeout(() => this.setState({ active: true }), 0)
 
     onBack = () => this.setState({ active: false }, () => {
-      this.props.actions.setTransition({ active: false });
-      return this.props.navigateDebounce(routeCodes.PROJECTS, null, 475);
+      this.props.actions.setTransition({ active: false, index: null });
+      return this.props.navigateDebounce(routeCodes.PROJECTS, null, 275);
     })
 
     /**

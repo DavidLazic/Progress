@@ -3,7 +3,8 @@ import * as types from 'src/actions/types';
 
 const initState = {
   [types.TRANSITION]: {
-    active: false
+    active: false,
+    index: null
   }
 };
 
