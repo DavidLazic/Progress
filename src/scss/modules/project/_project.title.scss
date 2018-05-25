@@ -51,19 +51,3 @@
     }
   }
 }
-
-@media screen and (min-width: 480px) {
-  .h__project {
-
-    &__title {
-      font-size: 28px;
-
-      .h__modal.active & {
-
-        > span {
-          font-size: 34px;
-        }
-      }
-    }
-  }
-}

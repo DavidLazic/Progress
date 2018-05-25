@@ -1,13 +1,7 @@
 .h__navbar {
-  @include transition(all, 0.35s, ease);
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 200px;
-  height: 100%;
-  transform: translate3d(-200px, 0, 0);
-  -webkit-transform: translate3d(-200px, 0, 0);
-  background: #000;
+  background: $color-background;
 
   &__list-item {
     position: relative;
@@ -63,25 +57,6 @@
       button,
       a {
         color: $color-primary;
-      }
-    }
-  }
-
-  .h__article--menu-open & {
-    transform: translate3d(0, 0, 0);
-    -webkit-transform: translate3d(0, 0, 0);
-
-    &__list-item {
-      &.active {
-
-        &:before {
-          width: 4px;
-        }
-
-        &:after {
-          z-index: -1;
-          max-width: 100%;
-        }
       }
     }
   }

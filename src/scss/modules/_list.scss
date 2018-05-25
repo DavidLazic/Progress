@@ -24,8 +24,8 @@
       -webkit-transform: translate3d(-50%, -50%, 0);
       transform: translate3d(-50%, -50%, 0);
       opacity: 0.9;
-      background-image: -webkit-radial-gradient(closest-side, rgba(23, 29, 37, 0), $color-secondary);
-      background-image: radial-gradient(closest-side, rgba(23, 29, 37, 0), $color-secondary);
+      background-image: -webkit-radial-gradient(closest-side, rgba(23, 29, 37, 0), $color-background);
+      background-image: radial-gradient(closest-side, rgba(23, 29, 37, 0), $color-background);
       pointer-events: none;
       content: '';
     }

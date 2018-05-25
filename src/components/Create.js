@@ -31,7 +31,7 @@ export default class Create extends Component {
           onClick={ this.props.onCreate }
           label="Create"
           type="button"
-          secondary />
+          primary />
       </div>
     );
   }

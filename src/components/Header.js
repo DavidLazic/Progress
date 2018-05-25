@@ -9,7 +9,6 @@ import * as types from 'src/actions/types';
 
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
-import Menu from 'material-ui/svg-icons/navigation/menu';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
@@ -18,7 +17,6 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
   withSocket
 ])
 @connect(state => ({
-  Navbar: state.navbarReducer[types.NAVBAR],
   Auth: state.authReducer[types.AUTH]
 }), dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
@@ -27,22 +25,15 @@ export default class Header extends Component {
 
     static propTypes = {
       actions: t.object.isRequired,
-      Navbar: t.object.isRequired,
       Auth: t.object.isRequired,
       onLogout: t.func.isRequired
     }
-
-    onNavbarToggle = () => this.props.actions.setNavbar({ active: !this.props.Navbar.active })
 
     onLogin = () => !this.props.Auth.active && this.props.actions.setAuth({ active: true })
 
     render () {
       return (
         <div className="h__header">
-
-          <IconButton onClick={ this.onNavbarToggle }>
-            <Menu className="h__icon h__icon--menu" />
-          </IconButton>
 
           {
             this.props.Auth.data

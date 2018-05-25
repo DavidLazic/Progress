@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import t from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
 import { withNavigation } from 'src/lib/decorators';
-import classNames from 'classnames';
-import { date } from 'src/lib/utils';
 import { routeCodes } from 'src/routes';
-import { ProjectItem } from 'src/components/project';
 
-import IconBack from 'material-ui/svg-icons/navigation/arrow-back';
+import { ProjectItem } from 'src/components/project';
+import { AnimateGrow, AnimateDetails } from 'src/components/animate';
 
 @augmentComponent([
   withNavigation
@@ -34,59 +32,34 @@ export default class Project extends Component {
 
     state = { active: false }
 
-    componentDidMount = () => setTimeout(() => this.setState({ active: true }), 0)
+    componentDidMount = () =>
+      setTimeout(() =>
+        this.setState({ active: true }), 0)
 
-    onBack = () => this.setState({ active: false }, () => {
-      this.props.actions.setTransition({ active: false, index: null });
-      return this.props.navigateDebounce(routeCodes.PROJECTS, null, 275);
-    })
-
-    /**
-     * @description
-     * Get project duration in months
-     *
-     * @param  {Object} project
-     * @return {Number}
-     * @private
-     */
-    getDuration = project => date.getDuration(project.startTime, project.endTime)
+    onBack = () =>
+      this.setState({ active: false }, () => {
+        this.props.actions.setTransition({ active: false, index: null });
+        return this.props.navigateDebounce(routeCodes.PROJECTS, null, 275);
+      })
 
     render () {
       const { id, data } = this.props.location.state;
-      const classes = classNames({
-        'h__transition': true,
-        'h__transition--project': true,
-        'active': this.state.active
-      });
 
       return (
-        <div className={ classes } style={ this.props.position }>
-          <span className="h__transition-back" onClick={ this.onBack } >
-            <IconBack />
-          </span>
+        <Fragment>
+          <AnimateGrow
+            active={ this.state.active }
+            position={ this.props.position } />
 
-          <div className="h__transition-inner">
+          <AnimateDetails
+            active={ this.state.active }
+            position={ this.props.position }
+            onBack={ this.onBack } >
             <ProjectItem
-              transition={ true }
               id={ id }
               project={ data } />
-
-            <div className="h__project__months">
-              {
-                this.getDuration(data) > 1
-                  ? `${date.getMonthName(data.startTime)} ${date.getYear(data.startTime)} - ${date.getMonthName(data.endTime)} ${date.getYear(data.endTime)}`
-                  : `${date.getMonthName(data.startTime)}`
-              }
-            </div>
-
-            <div className="h__project__duration">
-              { this.getDuration(data) }
-              <div>
-                { `month${this.getDuration(data) > 1 && 's' || ''}` }
-              </div>
-            </div>
-          </div>
-        </div>
+          </AnimateDetails>
+        </Fragment>
       );
     }
 }

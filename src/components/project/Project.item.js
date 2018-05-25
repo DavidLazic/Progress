@@ -1,76 +1,50 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
 import { withNavigation, withTransition } from 'src/lib/decorators';
-import { routeCodes } from 'src/routes';
 import { date } from 'src/lib/utils';
 
-@connect(state => state, dispatch => ({
-  actions: bindActionCreators(ActionCreators, dispatch)
-}))
 @augmentComponent([
   withNavigation,
   withTransition
-], {
-  transition: { className: 'h__list-item h__list-item--projects' }
-})
+])
 export default class ProjectItem extends Component {
 
     static propTypes = {
-      id: t.string.isRequired,
-      project: t.object.isRequired,
-      modifierClass: t.string,
-      transition: t.bool,
-      onChange: t.func.isRequired,
-      actions: t.object.isRequired
+      project: t.object.isRequired
     }
 
-    static defaultProps = {
-      modifierClass: '',
-      transition: false
-    }
-
-    /**
-     * @description
-     * Get project duration in months
-     *
-     * @return {Number}
-     * @private
-     */
-    getDuration = () => date.getDuration(this.props.project.startTime, this.props.project.endTime)
-
-    /**
-     * @description
-     * On item select fn
-     * Create dynamic route and forward item data
-     *
-     * @return {Function}
-     * @private
-     */
-    onSelect = () => !this.props.transition && (
-      this.props.actions.setTransition({ active: true, index: this.props.project.index }),
-      this.props.onChange(`${routeCodes.PROJECTS}/${this.props.id}`, {
-        id: this.props.id,
-        data: this.props.project
-      })
-    )
+    getDuration = project =>
+      date.getDuration(project.startTime, project.endTime)
 
     render () {
       const { project } = this.props;
 
       return (
         <div
-          className={ `h__project ${this.props.modifierClass}` }
+          className="h__project"
           onClick={ this.onSelect }>
 
           <div className="h__project__title">
             <span>
-              { project.name }
+              { project.title }
             </span>
             <div className="h__project__border"></div>
+          </div>
+
+          <div className="h__project__months">
+            {
+              this.getDuration(project) > 1
+                ? `${date.getMonthName(project.startTime)} ${date.getYear(project.startTime)} - ${date.getMonthName(project.endTime)} ${date.getYear(project.endTime)}`
+                : `${date.getMonthName(project.startTime)}`
+            }
+          </div>
+
+          <div className="h__project__duration">
+            { this.getDuration(project) }
+            <div>
+              { `month${this.getDuration(project) > 1 && 's' || ''}` }
+            </div>
           </div>
         </div>
       );

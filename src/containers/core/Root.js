@@ -9,7 +9,7 @@ import Routes from 'src/routes';
 // import env from 'env';
 
 const theme = getMuiTheme(darkBaseTheme, {
-  palette: { accent3Color: '#3d8b47' }
+  palette: { accentColor: '#e0b733' }
 });
 
 export default class Root extends Component {

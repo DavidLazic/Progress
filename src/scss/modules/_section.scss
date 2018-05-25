@@ -1,4 +1,7 @@
 .h__section {
+  display: flex;
 
-
+  > div {
+    width: 100%;
+  }
 }

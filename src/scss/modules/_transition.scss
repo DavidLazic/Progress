@@ -1,5 +1,5 @@
 .h__transition {
-  position: fixed;
+  position: absolute;
   overflow: hidden;
   top: 0;
   left: 0;
@@ -8,8 +8,22 @@
   z-index: 1200;
   opacity: 0;
   background: #fff;
-  transition: all 0.325s $transition-ease-in 0.12s, opacity 0.25s $transition-ease-out 0.1s;
-  -webkit-transition: all 0.325s $transition-ease-in 0.12s, opacity 0.25s $transition-ease-out 0.1s;
+  transition: all 0.325s $transition-ease-in 0.35;
+  -webkit-transition: all 0.325s $transition-ease-in 0.35s;
+
+  &__grow {
+    position: absolute;
+    opacity: 0;
+    z-index: 1100;
+    background: $color-highlight;
+    border-radius: 50%;
+    -webkit-transition: all 0.35s $transition-ease-out 0.35s, opacity 0.325s $transition-ease-out 0.35s;
+    transition: all 0.35s $transition-ease-out 0.35s, opacity 0.325s $transition-ease-out 0.35s;
+
+    &.active {
+      opacity: 1;
+    }
+  }
 
   &-back {
     @include transition(all, 0.235s, $transition-ease-in, 0.1s);
@@ -45,8 +59,8 @@
     right: 0 !important;
     bottom: 0 !important;
     opacity: 1;
-    transition: all 0.325s $transition-ease-out 0.3s, opacity 0.275s $transition-standard 0.35s;
-    -webkit-transition: all 0.325s $transition-ease-out 0.3s, opacity 0.275s $transition-standard 0.35s;
+    transition: all 0.375s $transition-ease-out 0.35s, opacity 0.275s $transition-standard 0.6s;
+    -webkit-transition: all 0.375s $transition-ease-out 0.35s, opacity 0.275s $transition-standard 0.6s;
   }
 
   &--project {

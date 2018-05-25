@@ -1,5 +1,6 @@
 @import
 'project.duration',
+'project.preview',
 'project.title';
 
 .h__project {
@@ -45,25 +46,6 @@
     &:after {
       right: 0;
       background: $color-border-secondary;
-    }
-  }
-}
-
-@media screen and (min-width: 480px) {
-  .h__project {
-
-    .h__modal.active & {
-      max-height: 350px;
-    }
-  }
-}
-
-@media screen and (min-width: 680px) {
-  .h__project {
-    max-height: 100%;
-
-    .h__modal.active & {
-      max-height: 250px;
     }
   }
 }

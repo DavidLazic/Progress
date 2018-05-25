@@ -27,19 +27,19 @@ export const withTransition = (WrappedComponent = () => null, { transition }) =>
      * @public
      */
     onTransition = (route, props) => {
-      const { top, right, bottom, left, width, height } = this.component.getBoundingClientRect();
+      const { top, left, bottom, right, width } = this.component.getBoundingClientRect();
 
       return this.props.navigate(route, {
         ...props,
-        to: 'transition',
+        to: 'details',
         meta: {
           from: {
-            top,
-            right,
+            top: top - 60,
+            left: left - 200,
             bottom,
-            left,
+            right,
             width,
-            height
+            height: width
           }
         }
       });
@@ -52,7 +52,7 @@ export const withTransition = (WrappedComponent = () => null, { transition }) =>
           ref={ el => this.component = el }>
           <WrappedComponent
             { ...this.props }
-            onChange={ this.onTransition } />
+            onTransition={ this.onTransition } />
         </div>
       );
     }
