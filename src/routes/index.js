@@ -4,13 +4,14 @@ import history from './history';
 
 import App from 'src/containers/core/App';
 
-import { Projects } from 'src/containers/views';
+import { Projects, Admin } from 'src/containers/views';
 
 const publicPath = '/';
 
 export const routeCodes = {
   ROOT: publicPath,
-  PROJECTS: `${ publicPath }projects`
+  PROJECTS: `${ publicPath }projects`,
+  ADMIN: `${ publicPath }admin`
 };
 
 export default class Routes extends Component {
@@ -19,8 +20,9 @@ export default class Routes extends Component {
       <Router history={ history }>
         <App>
           <Switch>
-            <Route path={ routeCodes.ROOT } component={ Projects } />
-            <Route path={ routeCodes.PROJECTS } component={ Projects } />
+            <Route exact path={ routeCodes.ROOT } component={ Projects } />
+            <Route exact path={ routeCodes.PROJECTS } component={ Projects } />
+            <Route exact path={ routeCodes.ADMIN } component={ Admin } />
           </Switch>
         </App>
       </Router>

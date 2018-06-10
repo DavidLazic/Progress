@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
-import { withNavigation } from 'src/lib/decorators';
+import { useNavigation } from 'src/lib/decorators';
 import { routeCodes } from 'src/routes';
 
 import { ProjectItem } from 'src/components/project';
 import { AnimateGrow, AnimateDetails } from 'src/components/animate';
 
 @augmentComponent([
-  withNavigation
+  useNavigation
 ])
 @connect(state => state, dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)

@@ -1,11 +1,11 @@
-import { withNavigation } from './withNavigation';
-import { withTransition } from './withTransition';
-import { withForm } from './withForm';
-import { withSocket } from './withSocket';
+import { useNavigation } from './useNavigation';
+import { useTransition } from './useTransition';
+import { useForm } from './useForm';
+import { useSocket } from './useSocket';
 
 export {
-  withNavigation,
-  withForm,
-  withTransition,
-  withSocket
+  useNavigation,
+  useForm,
+  useTransition,
+  useSocket
 };

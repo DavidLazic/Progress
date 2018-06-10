@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 import { augmentComponent } from 'react-augment';
-import { withNavigation, withTransition } from 'src/lib/decorators';
+import { useNavigation, useTransition } from 'src/lib/decorators';
 import { date } from 'src/lib/utils';
 
 @augmentComponent([
-  withNavigation,
-  withTransition
+  useNavigation,
+  useTransition
 ])
 export default class ProjectItem extends Component {
 

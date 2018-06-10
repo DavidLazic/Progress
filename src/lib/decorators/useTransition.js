@@ -10,8 +10,8 @@ import t from 'prop-types';
  * @return {Object}
  * @public
  */
-export const withTransition = (WrappedComponent = () => null, { transition }) =>
-  class WithTransition extends Component {
+export const useTransition = (WrappedComponent = () => null, { transition }) =>
+  class UseTransition extends Component {
 
     static propTypes = {
       navigate: t.func.isRequired

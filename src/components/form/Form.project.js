@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 import { augmentComponent } from 'react-augment';
-import { withForm } from 'src/lib/decorators';
+import { useForm } from 'src/lib/decorators';
 import { date } from 'src/lib/utils';
 import Dates from './fragments/Fragment.dates';
 import Tags from './fragments/Fragment.tags';
@@ -22,7 +22,7 @@ const MODEL = {
 };
 
 @augmentComponent([
-  withForm
+  useForm
 ], { form: MODEL })
 export default class FormProject extends Component {
 

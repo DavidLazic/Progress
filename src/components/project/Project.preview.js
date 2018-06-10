@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
-import { withTransition, withNavigation } from 'src/lib/decorators';
+import { useTransition, useNavigation } from 'src/lib/decorators';
 import { routeCodes } from 'src/routes';
 
 @connect(state => state, dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
 @augmentComponent([
-  withNavigation,
-  withTransition
+  useNavigation,
+  useTransition
 ])
 export default class ProjectPreview extends Component {
 

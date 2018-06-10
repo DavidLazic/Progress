@@ -10,8 +10,8 @@ import t from 'prop-types';
  * @return {Object}
  * @public
  */
-export const withForm = (WrappedComponent = () => null, { form } = {}) =>
-  class WithForm extends Component {
+export const useForm = (WrappedComponent = () => null, { form } = {}) =>
+  class UseForm extends Component {
 
     static propTypes = {
       prepopulate: t.object,

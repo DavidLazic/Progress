@@ -11,8 +11,8 @@ import firebase from 'src/firebase';
  * @return {Object}
  * @public
  */
-export const withSocket = (WrappedComponent = () => null, { socket } = {}) =>
-  class WithSocket extends Component {
+export const useSocket = (WrappedComponent = () => null, { socket } = {}) =>
+  class UseSocket extends Component {
 
     static propTypes = {
       actions: t.object
@@ -36,13 +36,9 @@ export const withSocket = (WrappedComponent = () => null, { socket } = {}) =>
           .map(ref => firebase.database().ref(ref).off('value', this.onChange));
     }
 
-    onLogin = ({ email, password }) => firebase.auth().signInWithEmailAndPassword(email, password)
-
-    onLogout = () => firebase.auth().signOut()
-
     onChange = (ref, snapshot) => this.props.actions[ref](snapshot.val())
 
-    onCreateProject = project => {
+    onProjectCreate = project => {
       const { key } = firebase.database().ref('/projects').push();
 
       const transform = (type, id) =>
@@ -58,12 +54,17 @@ export const withSocket = (WrappedComponent = () => null, { socket } = {}) =>
       return firebase.database().ref().update(updates);
     }
 
+    onProjectDelete = id => {
+      console.log('DELETING PROJECT', id);
+    }
+
     render () {
       return (
         <WrappedComponent
           onLogin={ this.onLogin }
           onLogout={ this.onLogout }
-          onCreateProject={ this.onCreateProject }
+          onProjectCreate={ this.onProjectCreate }
+          onProjectDelete={ this.onProjectDelete }
           { ...this.props } />
       );
     }

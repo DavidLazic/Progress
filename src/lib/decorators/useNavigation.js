@@ -10,8 +10,8 @@ import history from 'src/routes/history';
  * @return {Object}
  * @public
  */
-export const withNavigation = (WrappedComponent = () => null) =>
-  class WithNavigation extends Component {
+export const useNavigation = (WrappedComponent = () => null) =>
+  class UseNavigation extends Component {
 
     /**
      * @description

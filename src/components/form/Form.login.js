@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 import { augmentComponent } from 'react-augment';
-import { withForm } from 'src/lib/decorators';
+import { useForm } from 'src/lib/decorators';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -13,7 +13,7 @@ const MODEL = {
 };
 
 @augmentComponent([
-  withForm
+  useForm
 ], { form: MODEL })
 export default class FormLogin extends Component {
 

@@ -1,47 +1,60 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import t from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
-import { augmentComponent } from 'react-augment';
-import { withSocket } from 'src/lib/decorators';
-import * as types from 'src/actions/types';
+import firebase from 'src/firebase';
 
 import { FormLogin } from 'src/components/form';
 import Dialog from 'material-ui/Dialog';
 
-@augmentComponent([
-  withSocket
-])
-@connect(state => ({
-  Auth: state.authReducer[types.AUTH]
-}), dispatch => ({
+@connect(state => state, dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
 export default class Login extends Component {
 
     static propTypes = {
       actions: t.object.isRequired,
-      Auth: t.object.isRequired,
-      onLogin: t.func.isRequired
+      Auth: t.object.isRequired
     }
 
-    onLogin = props => {
+    onLogin = ({ email, password }) => {
       this.props.actions.setAuth({ active: false });
-      return this.props.onLogin(props);
+      return firebase.auth().signInWithEmailAndPassword(email, password);
     }
 
-    onCancel = () => this.props.actions.setAuth({ active: false })
+    onLogout = () => firebase.auth().signOut()
+
+    onLoginActivate = () => !this.props.Auth.active && this.props.actions.setAuth({ active: true })
+
+    onLoginCancel = () => this.props.actions.setAuth({ active: false })
 
     render () {
-      return (
-        <Dialog
-          open={ this.props.Auth.active }>
-          <FormLogin
-            onSubmit={ this.onLogin }
-            onCancel={ this.onCancel }
-            error={ this.props.Auth.error } />
-        </Dialog>
-      );
+      return this.props.Auth.data
+        ? (
+          <button
+            type="button"
+            onClick={ this.onLogout }>
+            Logout
+          </button>
+        )
+        :
+        (
+          <Fragment>
+            <button
+              type="button"
+              onClick={ this.onLoginActivate }>
+              Login
+            </button>
+
+            <Dialog
+              open={ this.props.Auth.active }>
+              <FormLogin
+                onSubmit={ this.onLogin }
+                onCancel={ this.onLoginCancel }
+                error={ this.props.Auth.error } />
+            </Dialog>
+          </Fragment>
+        );
     }
 }
