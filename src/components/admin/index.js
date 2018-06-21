@@ -1,7 +1,9 @@
 import AdminTable from './Admin.table';
-import AdminNew from './Admin.new';
+import AdminCreate from './Admin.create';
+import AdminProjects from './Admin.projects';
 
 export {
   AdminTable,
-  AdminNew
+  AdminCreate,
+  AdminProjects
 };

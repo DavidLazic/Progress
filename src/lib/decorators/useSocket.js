@@ -38,33 +38,14 @@ export const useSocket = (WrappedComponent = () => null, { socket } = {}) =>
 
     onChange = (ref, snapshot) => this.props.actions[ref](snapshot.val())
 
-    onProjectCreate = project => {
-      const { key } = firebase.database().ref('/projects').push();
-
-      const transform = (type, id) =>
-        Object.keys(project[type]).reduce((acc, entry) =>
-          ({ ...acc, [`/${type}/${entry}/${id}`]: true}), {});
-
-      const updates = {
-        [`/projects/${key}`]: project,
-        ...(project.tags ? transform('tags', key) : {}),
-        ...(project.periods ? transform('periods', key) : {})
-      };
-
-      return firebase.database().ref().update(updates);
-    }
-
-    onProjectDelete = id => {
-      console.log('DELETING PROJECT', id);
-    }
+    onApply = updates => firebase.database().ref().update(updates)
 
     render () {
       return (
         <WrappedComponent
           onLogin={ this.onLogin }
           onLogout={ this.onLogout }
-          onProjectCreate={ this.onProjectCreate }
-          onProjectDelete={ this.onProjectDelete }
+          onApply={ this.onApply }
           { ...this.props } />
       );
     }

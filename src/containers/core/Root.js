@@ -5,8 +5,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Routes from 'src/routes';
-// import DevTools from './DevTools';
-// import env from 'env';
+import DevTools from './DevTools';
+import env from 'env';
 
 const theme = getMuiTheme(darkBaseTheme, {
   palette: { accentColor: '#e0b733' }
@@ -25,7 +25,8 @@ export default class Root extends Component {
             <div>
               <Routes />
               {
-                // env.name === 'development' && <DevTools />
+                env.name === 'development' &&
+                <DevTools />
               }
             </div>
           </Provider>

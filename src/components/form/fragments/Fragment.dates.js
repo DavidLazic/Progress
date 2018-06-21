@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import t from 'prop-types';
-import { date } from 'src/lib/utils';
+import { Moment } from 'src/lib/utils';
 
 import DatePicker from 'material-ui/DatePicker';
 
@@ -16,8 +16,8 @@ const Dates = ({ name, index, frame, onChange }) => (
           onChange({
             ...frame,
             index,
-            start: date.toDate(selected),
-            period: date.getYear(selected)
+            start: Moment.toDate(selected),
+            period: Moment.getYear(selected)
           })
         } />
     </div>
@@ -32,8 +32,8 @@ const Dates = ({ name, index, frame, onChange }) => (
           onChange({
             ...frame,
             index,
-            end: date.toDate(selected),
-            period: date.getYear(selected)
+            end: Moment.toDate(selected),
+            period: Moment.getYear(selected)
           })
         } />
     </div>

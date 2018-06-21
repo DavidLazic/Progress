@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import t from 'prop-types';
 import { augmentComponent } from 'react-augment';
 import { useNavigation, useTransition } from 'src/lib/decorators';
-import { date } from 'src/lib/utils';
+import { Moment } from 'src/lib/utils';
 
 @augmentComponent([
   useNavigation,
@@ -15,7 +15,7 @@ export default class ProjectItem extends Component {
     }
 
     getDuration = project =>
-      date.getDuration(project.startTime, project.endTime)
+      Moment.getDuration(project.startTime, project.endTime)
 
     render () {
       const { project } = this.props;
@@ -35,8 +35,8 @@ export default class ProjectItem extends Component {
           <div className="h__project__months">
             {
               this.getDuration(project) > 1
-                ? `${date.getMonthName(project.startTime)} ${date.getYear(project.startTime)} - ${date.getMonthName(project.endTime)} ${date.getYear(project.endTime)}`
-                : `${date.getMonthName(project.startTime)}`
+                ? `${Moment.getMonthName(project.startTime)} ${Moment.getYear(project.startTime)} - ${Moment.getMonthName(project.endTime)} ${Moment.getYear(project.endTime)}`
+                : `${Moment.getMonthName(project.startTime)}`
             }
           </div>
 

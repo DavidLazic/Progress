@@ -1,5 +1,5 @@
-import { date } from './date';
+import { Moment } from './Moment.utils';
 
 export {
-  date
+  Moment
 };

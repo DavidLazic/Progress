@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import t from 'prop-types';
 import { augmentComponent } from 'react-augment';
 import { useForm } from 'src/lib/decorators';
-import { date } from 'src/lib/utils';
+import { Moment } from 'src/lib/utils';
 import Dates from './fragments/Fragment.dates';
 import Tags from './fragments/Fragment.tags';
 
@@ -70,7 +70,7 @@ export default class FormProject extends Component {
       this.props.setValue({
         target: {
           name: 'frames',
-          value: [...this.props.data.frames, { start: date.toDate(new Date()), end: date.toDate(new Date()) }]
+          value: [...this.props.data.frames, { start: Moment.toDate(new Date()), end: Moment.toDate(new Date()) }]
         }
       })
 
@@ -132,11 +132,11 @@ export default class FormProject extends Component {
                 type="button" />
             }
 
-            <RaisedButton
+            <FlatButton
               className="form__submit"
               label={ this.props.prepopulate && 'Save' || 'Create' }
               type="submit"
-              backgroundColor="#483d8b"
+              primary={ true }
               onClick={ this.onSubmit } />
           </div>
 
