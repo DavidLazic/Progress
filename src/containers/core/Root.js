@@ -14,23 +14,23 @@ const theme = getMuiTheme(darkBaseTheme, {
 
 export default class Root extends Component {
 
-    static propTypes = {
-      store: t.object.isRequired
-    }
+  static propTypes = {
+    store: t.object.isRequired
+  }
 
-    render () {
-      return (
-        <MuiThemeProvider muiTheme={ theme }>
-          <Provider store={ this.props.store }>
-            <div>
-              <Routes />
-              {
-                env.name === 'development' &&
-                <DevTools />
-              }
-            </div>
-          </Provider>
-        </MuiThemeProvider>
-      );
-    }
+  render () {
+    return (
+      <MuiThemeProvider muiTheme={ theme }>
+        <Provider store={ this.props.store }>
+          <div>
+            <Routes />
+            {
+              env.name === 'development' &&
+              <DevTools />
+            }
+          </div>
+        </Provider>
+      </MuiThemeProvider>
+    );
+  }
 }

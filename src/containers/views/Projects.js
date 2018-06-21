@@ -25,7 +25,7 @@ import { Project } from 'src/containers/views';
 ], {
   socket: { refs: [refs.PROJECTS] }
 })
-export default class Projects extends Component {
+class Projects extends Component {
 
     static propTypes = {
       actions: t.object.isRequired,
@@ -84,3 +84,5 @@ export default class Projects extends Component {
       );
     }
 }
+
+export default Projects;

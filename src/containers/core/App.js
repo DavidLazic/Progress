@@ -16,34 +16,34 @@ import { Navbar } from 'src/components';
 }))
 class App extends Component {
 
-    static propTypes = {
-      actions: t.object.isRequired,
+  static propTypes = {
+    actions: t.object.isRequired,
 
-      location: t.object,
-      children: t.object,
-      Auth: t.object.isRequired
-    }
+    location: t.object,
+    children: t.object,
+    Auth: t.object.isRequired
+  }
 
-    static defaultProps = {
-      location: {},
-      children: null
-    }
+  static defaultProps = {
+    location: {},
+    children: null
+  }
 
-    componentDidMount () {
-      firebase.auth().onAuthStateChanged(user => this.props.actions.setAuth({ data: user }));
-    }
+  componentDidMount () {
+    firebase.auth().onAuthStateChanged(user => this.props.actions.setAuth({ data: user }));
+  }
 
-    render () {
-      return (
-        <div className="h__section">
-          <Navbar
-            path={ this.props.location.pathname }
-            Auth={ this.props.Auth } />
+  render () {
+    return (
+      <div className="h__section">
+        <Navbar
+          path={ this.props.location.pathname }
+          Auth={ this.props.Auth } />
 
-          { this.props.children }
-        </div>
-      );
-    }
+        { this.props.children }
+      </div>
+    );
+  }
 }
 
 export default withRouter(App);

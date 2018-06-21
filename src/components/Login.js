@@ -11,50 +11,52 @@ import Dialog from 'material-ui/Dialog';
 @connect(state => state, dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
-export default class Login extends Component {
+class Login extends Component {
 
-    static propTypes = {
-      actions: t.object.isRequired,
-      Auth: t.object.isRequired
-    }
+  static propTypes = {
+    actions: t.object.isRequired,
+    Auth: t.object.isRequired
+  }
 
-    onLogin = ({ email, password }) => {
-      this.props.actions.setAuth({ active: false });
-      return firebase.auth().signInWithEmailAndPassword(email, password);
-    }
+  onLogin = ({ email, password }) => {
+    this.props.actions.setAuth({ active: false });
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  }
 
-    onLogout = () => firebase.auth().signOut()
+  onLogout = () => firebase.auth().signOut()
 
-    onLoginActivate = () => !this.props.Auth.active && this.props.actions.setAuth({ active: true })
+  onLoginActivate = () => !this.props.Auth.active && this.props.actions.setAuth({ active: true })
 
-    onLoginCancel = () => this.props.actions.setAuth({ active: false })
+  onLoginCancel = () => this.props.actions.setAuth({ active: false })
 
-    render () {
-      return this.props.Auth.data
-        ? (
+  render () {
+    return this.props.Auth.data
+      ? (
+        <button
+          type="button"
+          onClick={ this.onLogout }>
+          Logout
+        </button>
+      )
+      :
+      (
+        <Fragment>
           <button
             type="button"
-            onClick={ this.onLogout }>
-            Logout
+            onClick={ this.onLoginActivate }>
+            Login
           </button>
-        )
-        :
-        (
-          <Fragment>
-            <button
-              type="button"
-              onClick={ this.onLoginActivate }>
-              Login
-            </button>
 
-            <Dialog
-              open={ this.props.Auth.active }>
-              <FormLogin
-                onSubmit={ this.onLogin }
-                onCancel={ this.onLoginCancel }
-                error={ this.props.Auth.error } />
-            </Dialog>
-          </Fragment>
-        );
-    }
+          <Dialog
+            open={ this.props.Auth.active }>
+            <FormLogin
+              onSubmit={ this.onLogin }
+              onCancel={ this.onLoginCancel }
+              error={ this.props.Auth.error } />
+          </Dialog>
+        </Fragment>
+      );
+  }
 }
+
+export default Login;

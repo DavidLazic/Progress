@@ -23,7 +23,7 @@ import {
 ], {
   socket: { refs: [refs.PROJECTS] }
 })
-export default class Admin extends Component {
+class Admin extends Component {
 
   static propTypes = {
     Projects: t.object,
@@ -46,3 +46,5 @@ export default class Admin extends Component {
     );
   }
 }
+
+export default Admin;
