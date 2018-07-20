@@ -10,6 +10,6 @@
 export default function createHandlers (handlers) {
   return handlers.reduce((acc, handler) => ({
     ...acc,
-    [handler]: (state, action) => ({ [handler]: { ...state[handler], ...action.payload } })
+    [handler]: (state, action) => ({ ...state, [handler]: { ...state[handler], ...action.payload } })
   }), {});
 }

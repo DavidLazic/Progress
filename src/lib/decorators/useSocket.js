@@ -43,8 +43,6 @@ export const useSocket = (WrappedComponent = () => null, { socket } = {}) =>
     render () {
       return (
         <WrappedComponent
-          onLogin={ this.onLogin }
-          onLogout={ this.onLogout }
           onApply={ this.onApply }
           { ...this.props } />
       );
