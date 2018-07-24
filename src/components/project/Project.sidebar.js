@@ -31,20 +31,21 @@ class ProjectSidebar extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      active: 0
+      activeIndex: null
     };
   }
 
   componentDidMount () {
-    firebase
+    return firebase
       .database()
       .ref(refs.PERIODS)
       .once('value', snapshot =>
-        this.props.actions.projectsPeriods(snapshot.val()));
+        this.props.actions.projectsPeriods(snapshot.val())
+      );
   }
 
-  onPeriodChange = active =>
-    this.setState({ active }, () =>
+  onPeriodChange = (activeIndex, active) =>
+    this.setState({ activeIndex }, () =>
       this.props.onPeriodChange(active))
 
   render () {
@@ -62,9 +63,9 @@ class ProjectSidebar extends Component {
                   key={ key }
                   className={ classNames({
                     'h__sidebar__list-item': true,
-                    'active': this.state.active === index
+                    'active': this.state.activeIndex === index
                   }) }
-                  onClick={ () => this.onPeriodChange(index) }>
+                  onClick={ () => this.onPeriodChange(index, key) }>
                   <AnimateRipple>
                     <button>
                       { key }
