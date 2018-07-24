@@ -4,14 +4,11 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
-import { augmentComponent } from 'react-augment';
-import { useSocket } from 'src/lib/decorators';
-import refs from 'src/constants/refs';
 import * as types from 'src/actions/types';
 import { Route } from 'react-router-dom';
 import { routeCodes } from 'src/routes';
 
-import { ProjectPreview } from 'src/components/project';
+import { ProjectPreview, ProjectSidebar } from 'src/components/project';
 import { Project } from 'src/containers/views';
 
 @connect(state => ({
@@ -20,11 +17,6 @@ import { Project } from 'src/containers/views';
 }), dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
-@augmentComponent([
-  useSocket
-], {
-  socket: { refs: [refs.PROJECTS] }
-})
 class Projects extends Component {
 
     static propTypes = {
@@ -40,7 +32,15 @@ class Projects extends Component {
       Projects: null
     }
 
-    onSetTransition = ({ index }) => this.props.actions.setTransition({ active: true, index })
+    onSetTransition = ({ index }) =>
+      this.props.actions.setTransition({
+        active: true,
+        index
+      })
+
+    onPeriodChange = () => {
+
+    }
 
     render () {
       const { location } = this.props;
@@ -51,35 +51,43 @@ class Projects extends Component {
       return (
         <article className="h__article">
 
-          {
-            inTransition &&
-            <Route
-              path={ `${routeCodes.PROJECTS}/:id` }
-              render={ props => <Project { ...props } position={ position } /> } />
-          }
+          <ProjectSidebar
+            onPeriodChange={ this.onPeriodChange } />
 
-          <ul className="h__list h__list--honeycomb">
+          <div className="h__article__inner">
             {
-              this.props.Projects.data &&
-              Object.keys(this.props.Projects.data).map((key, index) => (
-                <li
-                  key={ key }
-                  className={ classNames({
-                    hex: true,
-                    active: this.props.Transition.index === index
-                  }) }>
-                  <div className="hex__wrapper">
-                    <ProjectPreview
-                      id={ key }
-                      project={ {
-                        index,
-                        ...this.props.Projects.data[key]
-                      } } />
-                  </div>
-                </li>
-              ))
+              inTransition &&
+              <Route
+                path={ `${routeCodes.PROJECTS}/:id` }
+                render={ props => <Project { ...props } position={ position } /> } />
             }
-          </ul>
+
+            <ul className="h__list h__list--honeycomb">
+              {
+                this.props.Projects.data &&
+                Object
+                  .keys(this.props.Projects.data)
+                  .map((key, index) => (
+                    <li
+                      key={ key }
+                      className={ classNames({
+                        hex: true,
+                        active: this.props.Transition.index === index
+                      }) }>
+                      <div className="hex__wrapper">
+                        <ProjectPreview
+                          id={ key }
+                          project={ {
+                            index,
+                            ...this.props.Projects.data[key]
+                          } } />
+                      </div>
+                    </li>
+                  ))
+              }
+            </ul>
+          </div>
+
         </article>
       );
     }

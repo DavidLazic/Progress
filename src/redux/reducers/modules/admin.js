@@ -2,12 +2,7 @@ import { createReducer, createHandlers } from 'src/redux';
 import * as types from 'src/actions/types';
 
 const initState = {
-  [types.PROJECTS]: {
-    data: null,
-    loading: false,
-    error: null
-  },
-  [types.PROJECTS_PERIODS]: {
+  [types.ADMIN_PROJECTS]: {
     data: null,
     loading: false,
     error: null
@@ -15,5 +10,5 @@ const initState = {
 };
 
 export default {
-  projectsReducer: createReducer(initState, createHandlers(Object.keys(initState)))
+  adminReducer: createReducer(initState, createHandlers(Object.keys(initState)))
 };

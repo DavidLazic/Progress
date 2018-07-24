@@ -5,14 +5,14 @@ import firebase from 'src/firebase';
 /**
  * @description
  * Higher order component
- * Component wrapper used for connecting component to a specific ref socket
+ * Component wrapper used for connecting component to admin sockets
  *
  * @param  {Function} WrappedComponent
  * @return {Object}
  * @public
  */
-export const useSocket = (WrappedComponent = () => null, { socket } = {}) =>
-  class UseSocket extends Component {
+export const useAdmin = (WrappedComponent = () => null, { socket } = {}) =>
+  class UseAdmin extends Component {
 
     static propTypes = {
       actions: t.object
@@ -26,14 +26,20 @@ export const useSocket = (WrappedComponent = () => null, { socket } = {}) =>
       return socket &&
         socket.refs &&
         socket.refs
-          .map(ref => firebase.database().ref(ref).on('value', this.onChange.bind(this, ref)));
+          .map(ref => firebase
+            .database()
+            .ref(ref)
+            .on('value', this.onChange.bind(this, ref)));
     }
 
     componentWillUnmount () {
       return socket &&
         socket.refs &&
         socket.refs
-          .map(ref => firebase.database().ref(ref).off('value', this.onChange));
+          .map(ref => firebase
+            .database()
+            .ref(ref)
+            .off('value', this.onChange));
     }
 
     onChange = (ref, snapshot) => this.props.actions[ref](snapshot.val())

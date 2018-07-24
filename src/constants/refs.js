@@ -1,3 +1,5 @@
 export default {
-  PROJECTS: 'projects'
+  PROJECTS: 'projects',
+  PERIODS: 'periods',
+  TAGS: 'tags'
 };

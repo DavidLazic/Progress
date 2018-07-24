@@ -1,13 +1,7 @@
-.h__navbar {
+.h__sidebar {
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
+  width: 200px;
   background: $color-background;
-
-  &__list {
-    display: flex;
-  }
 
   &__list-item {
     position: relative;

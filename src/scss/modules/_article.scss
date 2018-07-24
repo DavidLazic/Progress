@@ -1,7 +1,6 @@
 .h__article {
   position: relative;
   display: flex;
-  width: calc(100% - 200px);
   min-height: calc(100vh - 60px);
   flex-direction: column;
   overflow: hidden;
@@ -11,7 +10,7 @@
     align-items: center;
   }
 
-  &--projects {
-    height: 100vh;
+  &__inner {
+    width: calc(100% - 200px);
   }
 }

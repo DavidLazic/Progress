@@ -48,16 +48,16 @@ class FormProject extends Component {
     return this.props.onSubmit(event);
   }
 
-  getFrames = ({ start, end, key, idx }) =>
+  getFrames = ({ start, end, key, index }) =>
     this.props.data[key].map((item, i) =>
-      (i === idx) ? { start, end } : item)
+      (i === index) ? { start, end } : item)
 
-  setDates = ({ start, end, period, key, idx }) =>
+  setDates = ({ start, end, period, key, index }) =>
     this.props.setValue({
       target: {
         name: key,
         value: this.props.data[key].length
-          ? this.getFrames({ start, end, idx, key })
+          ? this.getFrames({ start, end, index, key })
           : [{ start, end }] }
     }, {
       target: {

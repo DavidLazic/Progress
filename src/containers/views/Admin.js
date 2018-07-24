@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
-import { useSocket } from 'src/lib/decorators';
+import { useAdmin } from 'src/lib/decorators/socket';
 import refs from 'src/constants/refs';
 import * as types from 'src/actions/types';
 
@@ -14,12 +14,12 @@ import {
 } from 'src/components/admin';
 
 @connect(state => ({
-  Projects: state.projectsReducer[types.PROJECTS]
+  Projects: state.adminReducer[types.ADMIN_PROJECTS]
 }), dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
 @augmentComponent([
-  useSocket
+  useAdmin
 ], {
   socket: { refs: [refs.PROJECTS] }
 })
@@ -36,7 +36,7 @@ class Admin extends Component {
 
   render () {
     return (
-      <article className="h__article">
+      <article className="h__article h__article--admin">
         <AdminCreate onApply={ this.props.onApply } />
 
         <AdminProjects

@@ -31,9 +31,15 @@ export default class Navbar extends Component {
     };
   }
 
-  componentWillReceiveProps = props => this.setState({ active: this.getActiveRoute(props.path) })
+  componentWillReceiveProps = props =>
+    this.setState({
+      active: this.getActiveRoute(props.path)
+    })
 
-  getActiveRoute = path => Object.keys(this.routes).indexOf(path)
+  getActiveRoute = path =>
+    Object
+      .keys(this.routes)
+      .indexOf(path)
 
   render () {
     return (
