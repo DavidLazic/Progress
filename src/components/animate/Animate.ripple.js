@@ -7,11 +7,13 @@ export default class AnimateRipple extends Component {
     children: t.oneOfType([
       t.object,
       t.array
-    ])
+    ]),
+    duration: t.number
   }
 
   static defaultProps = {
-    children: null
+    children: null,
+    duration: 1000
   }
 
   state = { animating: false }
@@ -39,7 +41,7 @@ export default class AnimateRipple extends Component {
   cleanRipple = () =>
     setTimeout(() =>
       this.container.firstChild &&
-        this.container.removeChild(this.container.firstChild), 2000)
+        this.container.removeChild(this.container.firstChild), this.props.duration)
 
 
   render () {

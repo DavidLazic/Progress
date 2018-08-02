@@ -10,7 +10,7 @@ import refs from 'src/constants/refs';
 import { Route } from 'react-router-dom';
 import { routeCodes } from 'src/routes';
 
-import { ProjectPreview, ProjectSidebar } from 'src/components/project';
+import { ProjectPreview, ProjectYear } from 'src/components/project';
 import { Project } from 'src/containers/views';
 
 @connect(state => ({
@@ -81,8 +81,13 @@ class Projects extends Component {
       return (
         <article className="h__article">
 
-          <ProjectSidebar
-            onPeriodChange={ this.onPeriodChange } />
+          <div className="h__article__actions">
+            <span>Projects</span>
+
+            <ProjectYear
+              onPeriodChange={ this.onPeriodChange } />
+          </div>
+
 
           <div className="h__article__inner">
             {
@@ -92,7 +97,7 @@ class Projects extends Component {
                 render={ props => <Project { ...props } position={ position } /> } />
             }
 
-            <ul className="h__list h__list--honeycomb">
+            <ul className="h__list h__grid">
               {
                 this.props.Projects.data &&
                 this.props.Projects.data.length &&
@@ -101,17 +106,14 @@ class Projects extends Component {
                     <li
                       key={ index }
                       className={ classNames({
-                        hex: true,
                         active: this.props.Transition.index === index
                       }) }>
-                      <div className="hex__wrapper">
-                        <ProjectPreview
-                          id={ project.id }
-                          project={ {
-                            index,
-                            project
-                          } } />
-                      </div>
+                      <ProjectPreview
+                        id={ project.id }
+                        project={ {
+                          index,
+                          ...project
+                        } } />
                     </li>
                   ))
               }

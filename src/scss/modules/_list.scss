@@ -6,34 +6,4 @@
     overflow: hidden;
     height: 100%;
   }
-
-  &--honeycomb {
-    position: relative;
-    margin: 0 auto;
-    padding: 0;
-    max-width: 60%;
-
-    &:before {
-      position: absolute;
-      display: block;
-      top: 50%;
-      left: 50%;
-      height: 150%;
-      width: 150%;
-      z-index: 1;
-      -webkit-transform: translate3d(-50%, -50%, 0);
-      transform: translate3d(-50%, -50%, 0);
-      opacity: 0.9;
-      background-image: -webkit-radial-gradient(closest-side, rgba(23, 29, 37, 0), $color-background);
-      background-image: radial-gradient(closest-side, rgba(23, 29, 37, 0), $color-background);
-      pointer-events: none;
-      content: '';
-    }
-
-    &:after {
-      display: block;
-      clear: both;
-      content: '';
-    }
-  }
 }

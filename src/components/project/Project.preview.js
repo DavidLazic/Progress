@@ -40,7 +40,7 @@ class ProjectPreview extends Component {
       <div
         className="h__project__preview"
         onClick={ this.onSelect }>
-        { project.name }
+        { project.title }
       </div>
     );
   }

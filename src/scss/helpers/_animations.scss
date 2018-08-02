@@ -24,6 +24,28 @@
   }
 }
 
+@keyframes fadeInLeftCenterY {
+  0% {
+    transform: translate3d(-20%, -50%, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, -50%, 0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeInLeftCenterY {
+  0% {
+    -webkit-transform: translate3d(-20%, -50%, 0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate3d(0, -50%, 0);
+    opacity: 1;
+  }
+}
+
 @-webkit-keyframes bounceIn {
   0% {
     opacity: 0;

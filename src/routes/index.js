@@ -21,8 +21,8 @@ export default class Routes extends Component {
         <App>
           <Switch>
             <Route exact path={ routeCodes.ROOT } component={ Projects } />
-            <Route exact path={ routeCodes.PROJECTS } component={ Projects } />
-            <Route exact path={ routeCodes.ADMIN } component={ Admin } />
+            <Route path={ routeCodes.PROJECTS } component={ Projects } />
+            <Route path={ routeCodes.ADMIN } component={ Admin } />
           </Switch>
         </App>
       </Router>

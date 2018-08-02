@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import firebase from 'src/firebase';
+import IconLogout from 'material-ui/svg-icons/action/power-settings-new';
+import IconLogin from 'material-ui/svg-icons/action/fingerprint';
 
 import { FormLogin } from 'src/components/form';
 import Dialog from 'material-ui/Dialog';
@@ -23,11 +25,15 @@ class Login extends Component {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
-  onLogout = () => firebase.auth().signOut()
+  onLogout = () =>
+    firebase.auth().signOut()
 
-  onLoginActivate = () => !this.props.Auth.active && this.props.actions.setAuth({ active: true })
+  onLoginActivate = () =>
+    !this.props.Auth.active &&
+    this.props.actions.setAuth({ active: true })
 
-  onLoginCancel = () => this.props.actions.setAuth({ active: false })
+  onLoginCancel = () =>
+    this.props.actions.setAuth({ active: false })
 
   render () {
     return this.props.Auth.data
@@ -35,6 +41,8 @@ class Login extends Component {
         <button
           type="button"
           onClick={ this.onLogout }>
+          <IconLogout
+            color="#b6b6b7" />
           Logout
         </button>
       )
@@ -44,6 +52,8 @@ class Login extends Component {
           <button
             type="button"
             onClick={ this.onLoginActivate }>
+            <IconLogin
+              color="#b6b6b7" />
             Login
           </button>
 

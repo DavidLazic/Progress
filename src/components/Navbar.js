@@ -3,6 +3,9 @@ import t from 'prop-types';
 import classNames from 'classnames';
 import { routeCodes } from 'src/routes';
 import { NavLink } from 'react-router-dom';
+import IconProjects from 'material-ui/svg-icons/action/list';
+import IconAdmin from 'material-ui/svg-icons/action/assessment';
+import IconArrow from 'material-ui/svg-icons/navigation/chevron-right';
 
 import { Login } from 'src/components';
 import { AnimateRipple } from 'src/components/animate';
@@ -19,10 +22,12 @@ export default class Navbar extends Component {
     this.routes = {
       [routeCodes.ROOT]: {
         label: 'Projects',
+        icon: <IconProjects />,
         restriction: () => true
       },
       [routeCodes.ADMIN]: {
         label: 'Admin',
+        icon: <IconAdmin />,
         restriction: Auth => !!Auth.data
       }
     };
@@ -44,6 +49,18 @@ export default class Navbar extends Component {
   render () {
     return (
       <section className="h__navbar">
+
+        <div className="h__navbar__user">
+          <div className="h__navbar__user-title">
+            <span>progress</span>
+          </div>
+          <div className="h__navbar__user-avatar"></div>
+          <div className="h__navbar__user-content">
+            David Lazić
+            <div>dlazic.dev@gmail.com</div>
+          </div>
+        </div>
+
         <ul className="h__navbar__list">
           {
             Object.keys(this.routes).map((route, index) =>
@@ -55,7 +72,17 @@ export default class Navbar extends Component {
                     'active': this.state.active === index
                   }) }>
                   <AnimateRipple>
-                    <NavLink to={ route }>{ this.routes[route].label }</NavLink>
+                    <NavLink to={ route }>
+                      { this.routes[route].icon }
+                      { this.routes[route].label }
+
+                      {
+                        (this.state.active === index) &&
+                        <span>
+                          <IconArrow />
+                        </span>
+                      }
+                    </NavLink>
                   </AnimateRipple>
                 </li>
               ) : null

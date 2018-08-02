@@ -1,68 +1,160 @@
 .h__navbar {
-  position: relative;
+  position: fixed;
   display: flex;
-  justify-content: space-between;
-  height: 60px;
-  background: $color-background;
+  padding: 60px 0;
+  flex-direction: column;
+  width: 300px;
+  height: 100vh;
+  font-weight: 300;
+  background: $color-grey-lighter;
+  border-right: 1px solid #e9e9e9;
+
+  button {
+    @include transition(all, 0.25s, ease);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 40px;
+    bottom: 40px;
+    background: none;
+    color: $color-grey-dark;
+    cursor: pointer;
+    text-align: left;
+
+    > svg {
+      margin-right: 10px;
+    }
+
+    &:hover {
+      color: $color-dark;
+
+      > svg {
+        fill: $color-dark !important;
+      }
+    }
+  }
+
+  &__user {
+    margin-bottom: 40px;
+
+    &-title {
+      margin-bottom: 50px;
+      font-family: 'Raleway';
+      font-weight: 600;
+      font-size: 32px;
+      text-align: center;
+
+      span {
+        background: linear-gradient(to right, $color-primary, $color-secondary);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    &-avatar {
+      margin-bottom: 25px;
+      width: 100%;
+      height: 120px;
+      background: url('images/me.png') center no-repeat;
+      background-size: contain;
+    }
+
+    &-content {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 400;
+      color: $color-dark;
+
+      div {
+        margin-top: 10px;
+        color: $color-grey-dark;
+        font-size: 16px;
+        font-weight: 300;
+      }
+    }
+  }
 
   &__list {
     display: flex;
+    flex-direction: column;
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
   }
 
   &__list-item {
+    @include transition(box-shadow, 0.3s, $transition-hover);
     position: relative;
     overflow: hidden;
     cursor: pointer;
 
-    button {
-      background: none;
-      cursor: pointer;
-      text-align: left;
-    }
-
-    button,
     a {
-      @include transition(all, 0.25s, ease);
-      display: block;
-      padding: 15px;
+      @include transition(all, 0.25s, $transition-standard);
+      display: flex;
+      align-items: center;
+      padding: 10px 15px 10px 40px;
       width: 100%;
-      font-family: $font-saira;
-      font-size: 20px;
-      color: #fff;
+      font-family: $font-roboto;
+      font-size: 16px;
+      font-weight: 300;
+      color: $color-grey-dark;
+
+      svg {
+        @include transition(color, 0.25s, $transition-hover);
+        margin-right: 10px;
+        color: $color-grey-dark !important;
+      }
+
+      span {
+        @include centerY();
+        -webkit-animation: fadeInLeftCenterY 0.375s ease forwards;
+        animation: fadeInLeftCenterY 0.375s ease forwards;
+        right: 15px;
+      }
 
       &:hover {
-        color: $color-primary;
+        color: $color-dark;
+
+        svg {
+          color: $color-dark !important;
+        }
       }
     }
 
     &:before {
-      @include transition(all, 0.375s, cubic-bezier(0.23, 1, 0.32, 1));
+      @include transition(max-width, 0.25s, $transition-hover);
       position: absolute;
       top: 0;
       left: 0;
       height: 100%;
-      width: 0;
-      background: $color-primary;
+      width: 100%;
+      max-width: 0px;
+      z-index: 2;
+      background: linear-gradient(to bottom, $color-secondary, $color-primary);
       content: '';
     }
 
-    &:after {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      max-width: 0;
-      background: rgba(255, 255, 255, 0.1);
-      pointer-events: none;
-      content: '';
+    &:hover {
+      box-shadow: $shadow-two;
+    }
+
+    & + & {
+      border-top: 1px solid #e9e9e9;
     }
 
     &.active {
 
-      button,
+      &:before {
+        max-width: 5px;
+      }
+
       a {
-        color: $color-primary;
+        padding: 25px 15px 25px 40px;
+        color: $color-secondary;
+
+        svg {
+          color: $color-secondary !important;
+        }
       }
     }
   }

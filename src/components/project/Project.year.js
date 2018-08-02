@@ -8,14 +8,12 @@ import { ActionCreators } from 'src/actions';
 import * as types from 'src/actions/types';
 import refs from 'src/constants/refs';
 
-import { AnimateRipple } from 'src/components/animate';
-
 @connect(state => ({
   Periods: state.projectsReducer[types.PROJECTS_PERIODS]
 }), dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
-class ProjectSidebar extends Component {
+class ProjectYear extends Component {
 
   static propTypes = {
     actions: t.object.isRequired,
@@ -51,33 +49,39 @@ class ProjectSidebar extends Component {
   render () {
 
     return (
-      <div className="h__sidebar">
-        <ul className="h__sidebar__list">
-          {
-            this.props.Periods.data &&
-            Object
-              .keys(this.props.Periods.data)
-              .reverse()
-              .map((key, index) => (
-                <li
-                  key={ key }
-                  className={ classNames({
-                    'h__sidebar__list-item': true,
-                    'active': this.state.activeIndex === index
-                  }) }
-                  onClick={ () => this.onPeriodChange(index, key) }>
-                  <AnimateRipple>
-                    <button>
+      <div className="h__select">
+        <span className="h__select__placeholder">
+          { this.state.selected }
+        </span>
+
+        <div>
+          <ul className="h__select__list">
+            {
+              this.props.Periods.data &&
+              Object
+                .keys(this.props.Periods.data)
+                .reverse()
+                .map((key, index) => (
+                  <li
+                    key={ key }
+                    className={ classNames({
+                      'h__select__list-item': true,
+                      'active': this.state.activeIndex === index
+                    }) }
+                    onClick={ () => this.onPeriodChange(index, key) }>
+                    <span>
                       { key }
-                    </button>
-                  </AnimateRipple>
-                </li>
-              ))
-          }
-        </ul>
+                    </span>
+                  </li>
+                ))
+            }
+          </ul>
+        </div>
+
+
       </div>
     );
   }
 }
 
-export default ProjectSidebar;
+export default ProjectYear;
