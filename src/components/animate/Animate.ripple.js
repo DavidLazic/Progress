@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import t from 'prop-types';
 
 export default class AnimateRipple extends Component {
@@ -8,12 +9,14 @@ export default class AnimateRipple extends Component {
       t.object,
       t.array
     ]),
-    duration: t.number
+    duration: t.number,
+    theme: t.string
   }
 
   static defaultProps = {
     children: null,
-    duration: 1000
+    duration: 1000,
+    theme: 'light'
   }
 
   state = { animating: false }
@@ -46,7 +49,12 @@ export default class AnimateRipple extends Component {
 
   render () {
     return (
-      <div className="h__ripple" ref={ el => this.ripple = el }>
+      <div
+        className={ classNames({
+          h__ripple: true,
+          [`h__ripple--${this.props.theme}`]: true
+        }) }
+        ref={ el => this.ripple = el }>
         <div className="h__ripple__container" ref={ el => this.container = el }></div>
         { this.props.children }
       </div>

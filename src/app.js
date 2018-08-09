@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { configStore } from 'src/redux/configStore';
+import { configStore } from 'src/store/store';
 import Root from 'src/containers/core/Root.js';
 import './scss/style.scss';
 

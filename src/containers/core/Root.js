@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import t from 'prop-types';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -22,13 +22,13 @@ export default class Root extends Component {
     return (
       <MuiThemeProvider muiTheme={ theme }>
         <Provider store={ this.props.store }>
-          <div>
+          <Fragment>
             <Routes />
             {
               env.name === 'development' &&
               <DevTools />
             }
-          </div>
+          </Fragment>
         </Provider>
       </MuiThemeProvider>
     );

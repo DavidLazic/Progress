@@ -53,10 +53,20 @@
 
 @mixin progressiveAnimationDelayIn ($start, $itemCount) {
   @for $i from $start through $itemCount {
-    $time: $i / 8 + 0s;
+    $time: $i / 2 + 0s;
     &:nth-child(#{$i}) {
       animation-delay: $time;
       -webkit-animation-delay: $time;
+    }
+  }
+}
+
+@mixin progressiveTransitionDelayIn ($start, $itemCount) {
+  @for $i from $start through $itemCount {
+    $time: $i / 24 + 0s;
+    &:nth-child(#{$i}) {
+      transition-delay: $time;
+      -webkit-transition-delay: $time;
     }
   }
 }

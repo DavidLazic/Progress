@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import * as types from 'src/actions/types';
 import refs from 'src/constants/refs';
+import IconMenu from 'material-ui/svg-icons/navigation/unfold-more';
 
 @connect(state => ({
   Periods: state.projectsReducer[types.PROJECTS_PERIODS]
@@ -29,12 +30,16 @@ class ProjectYear extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      activeIndex: null
+      activeIndex: null,
+      selected: null,
+      open: false
     };
   }
 
   componentDidMount () {
-    return firebase
+    document.addEventListener('click', this.onDocumentClick);
+
+    firebase
       .database()
       .ref(refs.PERIODS)
       .once('value', snapshot =>
@@ -42,20 +47,41 @@ class ProjectYear extends Component {
       );
   }
 
-  onPeriodChange = (activeIndex, active) =>
-    this.setState({ activeIndex }, () =>
-      this.props.onPeriodChange(active))
+  componentWillUnmount () {
+    document.removeEventListener('click', this.onDocumentClick);
+  }
+
+  onDocumentClick = e =>
+    (e.target !== this.select) &&
+    this.setState({ open: false })
+
+  onPeriodChange = (activeIndex, selected) =>
+    this.setState({ activeIndex, selected }, () =>
+      this.props.onPeriodChange(selected))
 
   render () {
 
     return (
-      <div className="h__select">
-        <span className="h__select__placeholder">
-          { this.state.selected }
+      <div
+        className={ classNames({
+          h__select: true,
+          active: this.state.open
+        }) }>
+
+        <span
+          ref={ ref => this.select = ref }
+          className="h__select__placeholder"
+          onClick={ () => this.setState({ open: true }) }>
+          {
+            this.state.selected || 'Year'
+          }
+          <span>
+            <IconMenu />
+          </span>
         </span>
 
-        <div>
-          <ul className="h__select__list">
+        <div className="h__select__options">
+          <ul>
             {
               this.props.Periods.data &&
               Object
@@ -65,8 +91,7 @@ class ProjectYear extends Component {
                   <li
                     key={ key }
                     className={ classNames({
-                      'h__select__list-item': true,
-                      'active': this.state.activeIndex === index
+                      active: this.state.activeIndex === index
                     }) }
                     onClick={ () => this.onPeriodChange(index, key) }>
                     <span>
@@ -77,8 +102,6 @@ class ProjectYear extends Component {
             }
           </ul>
         </div>
-
-
       </div>
     );
   }

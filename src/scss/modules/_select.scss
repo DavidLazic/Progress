@@ -1,4 +1,123 @@
 .h__select {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  font-size: 14px;
+  vertical-align: middle;
+  text-align: left;
+  border-radius: 8px;
+  background: #fff;
+  z-index: 100;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  color: $color-grey-dark;
 
+  &:focus {
+    outline: none;
+  }
+
+  &:before {
+    @include transition(transform, 0.3s, $transition-standard);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 2px;
+    background: #fff;
+    content: '';
+  }
+
+  &__placeholder {
+    @include transition(all, 0.3s, $transition-hover);
+    position: relative;
+    display: block;
+    padding: 15px 20px;
+    z-index: 10;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $color-secondary;
+    cursor: pointer;
+
+    > span {
+      @include centerY();
+      right: 5px;
+      pointer-events: none;
+    }
+
+    svg {
+      color: $color-grey-dark !important;
+      pointer-events: none;
+    }
+
+    .active & {
+      @include transition(all, 0.25s, $transition-standard);
+      opacity: 0;
+      text-indent: -120px;
+    }
+  }
+
+  &__options {
+    @include transition(all, 0.3s, $transition-standard);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-radius: 2px;
+    background: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .active & {
+      height: 400%;
+      z-index: 20;
+      -webkit-transform: scale3d(1.1, 1, 1);
+      transform: scale3d(1.1, 1, 1);
+    }
+
+    ul {
+      position: relative;
+      padding: 15px 0 25px;
+      visibility: hidden;
+
+      .active & {
+        visibility: visible;
+      }
+    }
+
+    li {
+      @include transition(all, 0.25s, $transition-ease-out);
+      padding: 10px 0;
+      opacity: 0;
+      -webkit-transform: translate3d(30%, 0, 0);
+      transform: translate3d(30%, 0, 0);
+      cursor: pointer;
+
+      &:hover {
+        color: $color-secondary;
+        background: $color-grey-lighter;
+      }
+
+      .active & {
+        @include progressiveTransitionDelayIn(0, 20);
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+
+  &.active {
+
+    &:before {
+      -webkit-transform: scale3d(1.1, 1.5, 1);
+      transform: scale3d(1.1, 1.5, 1);
+    }
+  }
 }
 

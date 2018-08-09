@@ -10,6 +10,8 @@ const setApplicationMenu = () => {
   Menu.setApplicationMenu(Menu.buildFromTemplate(menus));
 };
 
+require('electron-reload')(__dirname);
+
 app.on('ready', () => {
   setApplicationMenu();
 

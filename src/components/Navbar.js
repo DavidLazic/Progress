@@ -3,7 +3,7 @@ import t from 'prop-types';
 import classNames from 'classnames';
 import { routeCodes } from 'src/routes';
 import { NavLink } from 'react-router-dom';
-import IconProjects from 'material-ui/svg-icons/action/list';
+import IconProjects from 'material-ui/svg-icons/action/view-list';
 import IconAdmin from 'material-ui/svg-icons/action/assessment';
 import IconArrow from 'material-ui/svg-icons/navigation/chevron-right';
 
@@ -54,10 +54,10 @@ export default class Navbar extends Component {
           <div className="h__navbar__user-title">
             <span>progress</span>
           </div>
-          <div className="h__navbar__user-avatar"></div>
+          {/* <div className="h__navbar__user-avatar"></div> */}
           <div className="h__navbar__user-content">
-            David Lazić
-            <div>dlazic.dev@gmail.com</div>
+            {/* David Lazić */}
+            {/* <div>dlazic.dev@gmail.com</div> */}
           </div>
         </div>
 

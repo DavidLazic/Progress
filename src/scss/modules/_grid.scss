@@ -1,5 +1,19 @@
 .h__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 30px;
 
+  li {
+    position: relative;
+    padding-top: 100%;
+    border-radius: 2px;
+    background: #fff;
+    color: $color-grey-dark;
+
+    > div {
+      @include center();
+    }
+  }
 }
 
 

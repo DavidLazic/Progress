@@ -1,4 +1,4 @@
-import { createReducer, createHandlers } from 'src/redux';
+import { createReducer, createHandlers } from 'src/store';
 import * as types from 'src/actions/types';
 
 const initState = {
