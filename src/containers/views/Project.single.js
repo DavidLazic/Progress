@@ -54,7 +54,7 @@ class Project extends Component {
         <AnimateDetails
           active={ this.state.active }
           position={ this.props.position }
-          onBack={ this.onBack } >
+          onBack={ this.onBack }>
           <ProjectItem
             id={ id }
             project={ data } />

@@ -4,8 +4,11 @@ import storage from 'src/constants/localStorage';
 export default class Api {
 
     static get = (...args) => Api.httpRequest(Api.httpConfig('GET', ...args))
+
     static post = (...args) => Api.httpRequest(Api.httpConfig('POST', ...args))
+
     static put = (...args) => Api.httpRequest(Api.httpConfig('PUT', ...args))
+
     static delete = (...args) => Api.httpRequest(Api.httpConfig('DELETE', ...args))
 
     static headers = () => new Headers({

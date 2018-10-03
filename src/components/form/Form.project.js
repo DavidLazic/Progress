@@ -1,25 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import t from 'prop-types';
+import classNames from 'classnames';
 import { augmentComponent } from 'react-augment';
 import { useForm } from 'src/lib/decorators';
 import { Moment } from 'src/lib/utils';
-import Dates from './fragments/Fragment.dates';
+import { withStyles } from '@material-ui/core';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Tags from './fragments/Fragment.tags';
-
-import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import Dates from './fragments/Fragment.dates';
 
 const MODEL = {
   title: { label: 'Title', values: '', type: 'TextField' },
   subtitle: { label: 'Subtitle', values: '', type: 'TextField' },
   url: { label: 'URL', values: '', type: 'TextField' },
   description: { label: 'Description', values: '', type: 'TextField' },
-  content: { label: 'Content', values: '', props: { multiLine: true, rows: 10 }, type: 'TextField' },
+  content: { label: 'Content', values: '', props: { multiline: true, rows: 10 }, type: 'TextField' },
   tags: { label: 'Tags', tags: true, values: {}, type: 'Tags' },
   periods: { values: {}, disabled: true },
   frames: { values: [], date: true, type: 'Dates' }
 };
+
+const styles = theme => ({
+  margin: {
+    margin: theme.spacing.unit
+  }
+});
 
 @augmentComponent([
   useForm
@@ -32,7 +41,8 @@ class FormProject extends Component {
     onCancel: t.func,
     setValue: t.func.isRequired,
     data: t.object,
-    error: t.object
+    error: t.object,
+    classes: t.object.isRequired
   }
 
   static defaultProps = {
@@ -74,12 +84,13 @@ class FormProject extends Component {
       }
     })
 
-  renderTextField = ({ key, index }) => (
-    <TextField
+  renderTextField = ({ key, index, classes }) => (
+    <Input
       key={ index }
       name={ key }
-      className="form__field"
-      floatingLabelText={ MODEL[key].label }
+      className={ classNames(classes.margin) }
+      fullWidth
+      placeholder={ MODEL[key].label }
       value={ this.props.data[key] }
       onChange={ this.props.setValue }
       { ...MODEL[key].props } />
@@ -105,48 +116,71 @@ class FormProject extends Component {
   )
 
   render () {
+    const { classes } = this.props;
+
     return (
-      <form className="form" onSubmit={ this.onSubmit }>
-        {
-          Object.keys(MODEL).map((key, index) =>
-            !MODEL[key].disabled &&
-            this[`render${MODEL[key].type}`]({ key, index })
-          )
-        }
+      <Fragment>
+        <DialogTitle>
+          { this.props.prepopulate && 'Edit Project' || 'New Project' }
+        </DialogTitle>
 
-        <div className="form__frame">
-          <RaisedButton
-            className="form__submit"
-            label="Add Frame"
-            type="button"
-            backgroundColor="#483d8b"
-            onClick={ this.onAddFrame } />
-        </div>
+        <DialogContent>
+          <form className="form" onSubmit={ this.onSubmit }>
+            {
+              Object.keys(MODEL).map((key, index) =>
+                !MODEL[key].disabled
+                && this[`render${MODEL[key].type}`]({ key, index, classes })
+              )
+            }
 
-        <div className="form__actions">
+            <div className="form__frame">
+              <Button
+                className="form__submit"
+                variant="outlined"
+                type="button"
+                color="secondary"
+                onClick={ this.onAddFrame }>
+                Add Frame
+              </Button>
+            </div>
+
+            {
+              this.props.error
+              && <div className="form__error">{ this.props.error.message }</div>
+            }
+          </form>
+        </DialogContent>
+
+        <DialogActions>
+
           {
-            this.props.onCancel &&
-            <FlatButton
-              onClick={ this.props.onCancel }
-              label="Cancel"
-              type="button" />
+            this.props.onCancel
+            && (
+              <Button
+                className={ classes.margin }
+                onClick={ this.props.onCancel }
+                color="primary">
+                Cancel
+              </Button>
+            )
           }
 
-          <FlatButton
-            className="form__submit"
-            label={ this.props.prepopulate && 'Save' || 'Create' }
+          <Button
+            className={ classes.margin }
+            onClick={ this.onSubmit }
+            color="primary"
+            variant="contained"
             type="submit"
-            primary={ true }
-            onClick={ this.onSubmit } />
-        </div>
+            autoFocus>
+            { this.props.prepopulate && 'Save' || 'Create' }
+          </Button>
 
-        {
-          this.props.error &&
-          <div className="form__error">{ this.props.error.message }</div>
-        }
-      </form>
+        </DialogActions>
+      </Fragment>
+
+
     );
   }
 }
 
-export default FormProject;
+export default withStyles(styles)(FormProject);

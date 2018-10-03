@@ -3,9 +3,9 @@ import t from 'prop-types';
 import classNames from 'classnames';
 import { routeCodes } from 'src/routes';
 import { NavLink } from 'react-router-dom';
-import IconProjects from 'material-ui/svg-icons/action/view-list';
-import IconAdmin from 'material-ui/svg-icons/action/assessment';
-import IconArrow from 'material-ui/svg-icons/navigation/chevron-right';
+import IconProjects from '@material-ui/icons/ViewList';
+import IconAdmin from '@material-ui/icons/Assessment';
+import IconArrow from '@material-ui/icons/ChevronRight';
 
 import { Login } from 'src/components';
 import { AnimateRipple } from 'src/components/animate';
@@ -54,10 +54,10 @@ export default class Navbar extends Component {
           <div className="h__navbar__user-title">
             <span>progress</span>
           </div>
-          {/* <div className="h__navbar__user-avatar"></div> */}
+          <div className="h__navbar__user-avatar"></div>
           <div className="h__navbar__user-content">
-            {/* David Lazić */}
-            {/* <div>dlazic.dev@gmail.com</div> */}
+            David Lazić
+            <div>dlazic.dev@gmail.com</div>
           </div>
         </div>
 
@@ -77,10 +77,12 @@ export default class Navbar extends Component {
                       { this.routes[route].label }
 
                       {
-                        (this.state.active === index) &&
-                        <span>
-                          <IconArrow />
-                        </span>
+                        (this.state.active === index)
+                        && (
+                          <span>
+                            <IconArrow />
+                          </span>
+                        )
                       }
                     </NavLink>
                   </AnimateRipple>

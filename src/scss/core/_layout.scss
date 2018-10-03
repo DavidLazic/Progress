@@ -20,6 +20,10 @@ button {
   outline: none;
 }
 
+input {
+  box-shadow: inset 0px 0px 20px 20px #fff;
+}
+
 .layout {
   width: 100%;
   min-height: 100vh;

@@ -1,15 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import t from 'prop-types';
 import { Provider } from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Routes from 'src/routes';
-import DevTools from './DevTools';
 import env from 'env';
+import DevTools from './DevTools';
 
-const theme = getMuiTheme(darkBaseTheme, {
-  palette: { accentColor: '#e0b733' }
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#e56590' },
+    secondary: { main: '#3e75c8' },
+    accentColor: '#e0b733'
+  }
 });
 
 export default class Root extends Component {
@@ -20,13 +22,13 @@ export default class Root extends Component {
 
   render () {
     return (
-      <MuiThemeProvider muiTheme={ theme }>
+      <MuiThemeProvider theme={ theme }>
         <Provider store={ this.props.store }>
           <Fragment>
             <Routes />
             {
-              env.name === 'development' &&
-              <DevTools />
+              env.name === 'development'
+              && <DevTools />
             }
           </Fragment>
         </Provider>

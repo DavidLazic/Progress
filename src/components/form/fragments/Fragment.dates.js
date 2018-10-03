@@ -1,51 +1,55 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import t from 'prop-types';
 import { Moment } from 'src/lib/utils';
+import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+import DatePicker from 'material-ui-pickers/DatePicker';
 
-import DatePicker from 'material-ui/DatePicker';
+export default class Dates extends Component {
 
-const Dates = ({ name, index, frame, onChange }) => (
-  <Fragment>
-    <div className="calendar">
-      <div className="calendar__label">Start Date</div>
-      <DatePicker
-        name={ name }
-        category="start"
-        value={ new Date(frame.start) }
-        onChange={ (none, selected) =>
-          onChange({
-            ...frame,
-            index,
-            start: Moment.toDate(selected),
-            period: Moment.getYear(selected)
-          })
-        } />
-    </div>
+  static propTypes = {
+    name: t.string.isRequired,
+    index: t.number.isRequired,
+    frame: t.object.isRequired,
+    onChange: t.func.isRequired
+  }
 
-    <div className="calendar">
-      <div className="calendar__label">End Date</div>
-      <DatePicker
-        name={ name }
-        category="end"
-        value={ new Date(frame.end) }
-        onChange={ (none, selected) =>
-          onChange({
-            ...frame,
-            index,
-            end: Moment.toDate(selected),
-            period: Moment.getYear(selected)
-          })
-        } />
-    </div>
-    <div className="calendar__divider"></div>
-  </Fragment>
-);
+  onChange = type => selected =>
+    this.props.onChange({
+      ...this.props.frame,
+      index: this.props.index,
+      [type]: Moment.toDate(selected),
+      period: Moment.getYear(selected)
+    })
 
-Dates.propTypes = {
-  name: t.string.isRequired,
-  index: t.number.isRequired,
-  frame: t.object.isRequired,
-  onChange: t.func.isRequired
-};
+  render () {
+    const { name, frame } = this.props;
 
-export default Dates;
+    return (
+      <Fragment>
+        <div className="calendar">
+          <div className="calendar__label">Start Date</div>
+          <MuiPickersUtilsProvider utils={ MomentUtils }>
+            <DatePicker
+              name={ name }
+              category="start"
+              value={ new Date(frame.start) }
+              onChange={ this.onChange('start') } />
+          </MuiPickersUtilsProvider>
+        </div>
+
+        <div className="calendar">
+          <div className="calendar__label">End Date</div>
+          <MuiPickersUtilsProvider utils={ MomentUtils }>
+            <DatePicker
+              name={ name }
+              category="end"
+              value={ new Date(frame.end) }
+              onChange={ this.onChange('end') } />
+          </MuiPickersUtilsProvider>
+        </div>
+        <div className="calendar__divider"></div>
+      </Fragment>
+    );
+  }
+}

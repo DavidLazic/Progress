@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
-
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import Chip from 'material-ui/Chip';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 
 export default class Tags extends Component {
 
@@ -36,18 +35,20 @@ export default class Tags extends Component {
     return (
       <div className="form__tags">
         <div>
-          <TextField
+          <Input
             name={ this.props.name }
             className="form__field"
-            floatingLabelText={ this.props.label }
+            placeholder={ this.props.label }
             value={ this.state.tag }
             onChange={ e => this.setState({ tag: e.target.value }) } />
-          <RaisedButton
+          <Button
+            variant="outlined"
             className="form__tags--add"
             onClick={ this.onTagAdd }
-            label="Add Tag"
             type="button"
-            backgroundColor="#483d8b" />
+            color="secondary">
+            Add Tag
+          </Button>
         </div>
 
         <div>
@@ -55,9 +56,8 @@ export default class Tags extends Component {
             Object.keys(this.props.tags).map((tag, index) => (
               <Chip
                 key={ index }
-                onRequestDelete={ () => this.onTagRemove(tag) }>
-                { tag }
-              </Chip>
+                label={ tag }
+                onDelete={ () => this.onTagRemove(tag) } />
             ))
           }
         </div>

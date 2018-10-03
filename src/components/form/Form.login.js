@@ -3,9 +3,8 @@ import t from 'prop-types';
 import { augmentComponent } from 'react-augment';
 import { useForm } from 'src/lib/decorators';
 
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const MODEL = {
   email: { placeholder: 'Email', type: 'text', values: '' },
@@ -41,33 +40,36 @@ class FormLogin extends Component {
 
   render () {
     return (
-      <form className="form" onSubmit={ this.onSubmit }>
+      <form className="form form--login" onSubmit={ this.onSubmit }>
         {
           Object.keys(MODEL).map((key, index) => (
             <TextField
               key={ index }
               name={ key }
               type={ MODEL[key].type }
-              floatingLabelText={ MODEL[key].placeholder }
+              label={ MODEL[key].placeholder }
               value={ this.props.data[key] }
               onChange={ this.props.setValue } />
           ))
         }
 
-        <FlatButton
-          onClick={ this.onCancel }
-          label="Cancel"
-          type="button" />
-
-        <RaisedButton
+        <Button
           onClick={ this.onSubmit }
-          label="Submit"
-          type="submit"
-          primary={ true } />
+          color="primary"
+          type="submit">
+          Login
+        </Button>
+
+        <Button
+          onClick={ this.onCancel }
+          color="secondary"
+          type="button">
+          Cancel
+        </Button>
 
         {
-          this.props.error &&
-          <div className="form__error">{ this.props.error.message }</div>
+          this.props.error
+          && <div className="form__error">{ this.props.error.message }</div>
         }
       </form>
     );

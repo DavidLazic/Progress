@@ -43,8 +43,8 @@ export default class AnimateRipple extends Component {
 
   cleanRipple = () =>
     setTimeout(() =>
-      this.container.firstChild &&
-        this.container.removeChild(this.container.firstChild), this.props.duration)
+      this.container.firstChild
+        && this.container.removeChild(this.container.firstChild), this.props.duration)
 
 
   render () {

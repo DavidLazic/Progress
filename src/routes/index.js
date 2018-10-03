@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
-import history from './history';
-
 import App from 'src/containers/core/App';
-
 import { Projects, Admin } from 'src/containers/views';
+import history from './history';
 
 const publicPath = '/';
 

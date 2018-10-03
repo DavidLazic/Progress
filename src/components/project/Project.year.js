@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import * as types from 'src/actions/types';
 import refs from 'src/constants/refs';
-import IconMenu from 'material-ui/svg-icons/navigation/unfold-more';
+import IconMenu from '@material-ui/icons/UnfoldMore';
 
 @connect(state => ({
   Periods: state.projectsReducer[types.PROJECTS_PERIODS]
@@ -52,8 +52,8 @@ class ProjectYear extends Component {
   }
 
   onDocumentClick = e =>
-    (e.target !== this.select) &&
-    this.setState({ open: false })
+    (e.target !== this.select)
+    && this.setState({ open: false })
 
   onPeriodChange = (activeIndex, selected) =>
     this.setState({ activeIndex, selected }, () =>
@@ -83,8 +83,8 @@ class ProjectYear extends Component {
         <div className="h__select__options">
           <ul>
             {
-              this.props.Periods.data &&
-              Object
+              this.props.Periods.data
+              && Object
                 .keys(this.props.Periods.data)
                 .reverse()
                 .map((key, index) => (

@@ -23,9 +23,9 @@ export const useAdmin = (WrappedComponent = () => null, { socket } = {}) =>
     }
 
     componentDidMount () {
-      return socket &&
-        socket.refs &&
-        socket.refs
+      return socket
+        && socket.refs
+        && socket.refs
           .map(ref => firebase
             .database()
             .ref(ref)
@@ -33,9 +33,9 @@ export const useAdmin = (WrappedComponent = () => null, { socket } = {}) =>
     }
 
     componentWillUnmount () {
-      return socket &&
-        socket.refs &&
-        socket.refs
+      return socket
+        && socket.refs
+        && socket.refs
           .map(ref => firebase
             .database()
             .ref(ref)

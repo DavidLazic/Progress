@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import t from 'prop-types';
 
-import IconBack from 'material-ui/svg-icons/navigation/arrow-back';
+import IconBack from '@material-ui/icons/ArrowBack';
 
 export default class AnimateDetails extends Component {
 

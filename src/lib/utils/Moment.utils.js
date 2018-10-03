@@ -22,4 +22,3 @@ export class Moment {
 
   static format = day => moment(day).format('MMM YYYY')
 }
-

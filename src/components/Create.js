@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from '@material-ui/core/Dialog';
+import Button from '@material-ui/core/Button';
 
 export default class Create extends Component {
 
@@ -22,12 +22,12 @@ export default class Create extends Component {
       <div className="h__create">
         <Dialog
           title={ `Create ${this.props.type}` }
-          open={ this.props.open }
-          autoScrollBodyContent={ true }>
+          open={ this.props.open }>
           { this.props.children }
         </Dialog>
 
-        <RaisedButton
+        <Button
+          variant="contained"
           onClick={ this.props.onCreate }
           label="Create"
           type="button"

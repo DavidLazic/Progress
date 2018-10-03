@@ -13,8 +13,7 @@
     ]
   ],
   "plugins": [
-    "transform-decorators-legacy",
-    "syntax-decorators",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "transform-class-properties",
     ["transform-object-rest-spread", { "useBuiltIns": true }]
   ]

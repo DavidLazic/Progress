@@ -1,9 +1,9 @@
 import path from 'path';
 import url from 'url';
+import env from 'env';
 import { app, Menu, BrowserWindow } from 'electron';
 import { devMenuTemplate } from './menu/dev_menu_template';
 import { editMenuTemplate } from './menu/edit_menu_template';
-import env from 'env';
 
 const setApplicationMenu = () => {
   const menus = [editMenuTemplate, devMenuTemplate];
@@ -17,7 +17,7 @@ app.on('ready', () => {
 
   if (env.name === 'development') {
     BrowserWindow.addDevToolsExtension(
-      '/Users/dlazic/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.2.4_0'
+      '/Users/dlazic/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.4.0_0'
     );
   }
 

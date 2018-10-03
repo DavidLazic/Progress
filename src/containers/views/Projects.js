@@ -59,8 +59,8 @@ class Projects extends Component {
                 })))
           )
       ).then(data =>
-        data.length &&
-        this.props.actions.projectsSet(data))
+        data.length
+        && this.props.actions.projectsSet(data))
 
     onSetTransition = ({ index }) =>
       this.props.actions.setTransition({
@@ -91,20 +91,23 @@ class Projects extends Component {
 
           <div className="h__article__inner">
             {
-              inTransition &&
-              <Route
-                path={ `${routeCodes.PROJECTS}/:id` }
-                render={ props => <Project { ...props } position={ position } /> } />
+              inTransition
+              && (
+                <Route
+                  path={ `${routeCodes.PROJECTS}/:id` }
+                  render={ props => <Project { ...props } position={ position } /> } />
+              )
             }
 
             <ul className="h__list h__grid">
               {
-                this.props.Projects.data &&
-                this.props.Projects.data.length &&
                 this.props.Projects.data
+                && this.props.Projects.data.length
+                && this.props.Projects.data
                   .map((project, index) => (
                     <li
                       key={ index }
+                      data-text={ `${index + 1 > 9 ? '' : '0'}${index + 1}` }
                       className={ classNames({
                         active: this.props.Transition.index === index
                       }) }>

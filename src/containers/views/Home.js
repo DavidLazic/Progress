@@ -43,22 +43,24 @@ export default class Home extends Component {
     return (
       <article className="h__section h__section--home">
         {
-          this.props.user &&
-          <div>
-            {
-            //   <RaisedButton
-            //   onClick={ this.onLogout }
-            //   label="Logout"
-            //   primary={ true } />
+          this.props.user
+          && (
+            <div>
+              {
+                //   <RaisedButton
+                //   onClick={ this.onLogout }
+                //   label="Logout"
+                //   primary={ true } />
 
-            // <FlatButton
-            //   // onClick={ () => this.props.navigate(routeCodes.ADMIN_PROJECTS) }
-            //   label="Admin"
-            //   labelPosition="before"
-            //   primary
-            //   icon={ <IconChevronRight /> } />
-            }
-          </div>
+                // <FlatButton
+                //   // onClick={ () => this.props.navigate(routeCodes.ADMIN_PROJECTS) }
+                //   label="Admin"
+                //   labelPosition="before"
+                //   primary
+                //   icon={ <IconChevronRight /> } />
+              }
+            </div>
+          )
         }
 
       </article>
