@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
 import { useTransition, useNavigation } from 'src/lib/decorators';
-import { routeCodes } from 'src/routes';
+import { routes } from 'src/routes';
 
 @connect(state => state, dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
@@ -27,7 +27,7 @@ class ProjectPreview extends Component {
   onSelect = () => {
     this.props.actions.setTransition({ active: true, index: this.props.project.index });
 
-    this.props.onTransition(`${routeCodes.PROJECTS}/${this.props.id}`, {
+    this.props.onTransition(`${routes.PROJECTS}/${this.props.id}`, {
       id: this.props.id,
       data: this.props.project
     });

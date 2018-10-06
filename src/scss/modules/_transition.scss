@@ -15,7 +15,7 @@
     position: absolute;
     opacity: 0;
     z-index: 1100;
-    background: $color-highlight;
+    background: $color-blue;
     border-radius: 50%;
     -webkit-transition: all 0.35s $transition-ease-out 0.35s, opacity 0.325s $transition-ease-out 0.35s;
     transition: all 0.35s $transition-ease-out 0.35s, opacity 0.325s $transition-ease-out 0.35s;
@@ -64,6 +64,6 @@
   }
 
   &--project {
-    background: $color-highlight;
+    background: $color-blue;
   }
 }

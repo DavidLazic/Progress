@@ -39,6 +39,8 @@ class FormLogin extends Component {
   onCancel = () => this.props.onCancel()
 
   render () {
+    const { onCancel, setValue, data } = this.props;
+
     return (
       <form className="form form--login" onSubmit={ this.onSubmit }>
         {
@@ -48,8 +50,8 @@ class FormLogin extends Component {
               name={ key }
               type={ MODEL[key].type }
               label={ MODEL[key].placeholder }
-              value={ this.props.data[key] }
-              onChange={ this.props.setValue } />
+              value={ data[key] }
+              onChange={ setValue } />
           ))
         }
 
@@ -60,12 +62,17 @@ class FormLogin extends Component {
           Login
         </Button>
 
-        <Button
-          onClick={ this.onCancel }
-          color="secondary"
-          type="button">
-          Cancel
-        </Button>
+        {
+          onCancel
+          && (
+            <Button
+              onClick={ this.onCancel }
+              color="secondary"
+              type="button">
+              Cancel
+            </Button>
+          )
+        }
 
         {
           this.props.error

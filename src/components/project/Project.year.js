@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import * as types from 'src/actions/types';
 import refs from 'src/constants/refs';
-import IconMenu from '@material-ui/icons/UnfoldMore';
+import IconMenu from '@material-ui/icons/ArrowDropDown';
 
 @connect(state => ({
   Periods: state.projectsReducer[types.PROJECTS_PERIODS]

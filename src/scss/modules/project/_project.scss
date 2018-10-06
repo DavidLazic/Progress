@@ -9,7 +9,7 @@
   max-height: 120px;
   height: 100vh;
   font-family: $font-roboto;
-  color: $color-font-secondary;
+  color: $color-secondary;
   cursor: pointer;
 
   .h__modal.active & {
@@ -22,7 +22,7 @@
   &__months {
     font-size: 20px;
     text-transform: capitalize;
-    color: $color-font-secondary;
+    color: $color-secondary;
   }
 
   &__border {
@@ -38,12 +38,12 @@
 
     &:before {
       left: 0;
-      background: $color-border-primary;
+      background: $color-primary;
     }
 
     &:after {
       right: 0;
-      background: $color-border-secondary;
+      background: $color-secondary;
     }
   }
 }

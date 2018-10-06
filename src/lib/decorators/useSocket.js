@@ -11,8 +11,8 @@ import firebase from 'src/firebase';
  * @return {Object}
  * @public
  */
-export const useAdmin = (WrappedComponent = () => null, { socket } = {}) =>
-  class UseAdmin extends Component {
+export const useSocket = (WrappedComponent = () => null, { socket } = {}) =>
+  class UseSocket extends Component {
 
     static propTypes = {
       actions: t.object

@@ -1,52 +1,67 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 import classNames from 'classnames';
-import { routeCodes } from 'src/routes';
+import { routes } from 'src/routes';
 import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import firebase from 'src/firebase';
 import IconProjects from '@material-ui/icons/ViewList';
 import IconAdmin from '@material-ui/icons/Assessment';
 import IconArrow from '@material-ui/icons/ChevronRight';
-
-import { Login } from 'src/components';
 import { AnimateRipple } from 'src/components/animate';
+import IconLogout from '@material-ui/icons/PowerSettingsNew';
+import { withStyles } from '@material-ui/core/styles';
 
-export default class Navbar extends Component {
+const styles = () => ({
+  button: {
+    color: '#b6b6b7'
+  }
+});
+
+class Navbar extends Component {
 
   static propTypes = {
-    path: t.string.isRequired,
-    Auth: t.object.isRequired
+    location: t.object.isRequired,
+    Auth: t.object.isRequired,
+    classes: t.object.isRequired
   }
+
+  static getActiveRoute = (list, path) =>
+    Object
+      .keys(list)
+      .indexOf(path)
 
   constructor (props) {
     super(props);
     this.routes = {
-      [routeCodes.ROOT]: {
+      [routes.ADMIN_PROJECTS]: {
         label: 'Projects',
         icon: <IconProjects />,
         restriction: () => true
       },
-      [routeCodes.ADMIN]: {
+      [routes.ADMIN]: {
         label: 'Admin',
         icon: <IconAdmin />,
         restriction: Auth => !!Auth.data
       }
     };
     this.state = {
-      active: this.getActiveRoute(this.props.path)
+      active: Navbar.getActiveRoute(this.routes, this.props.location.pathname)
     };
   }
 
   componentWillReceiveProps = props =>
-    this.setState({
-      active: this.getActiveRoute(props.path)
+    props.location.pathname !== this.props.location.pathname
+    && this.setState({
+      active: Navbar.getActiveRoute(this.routes, props.location.pathname)
     })
 
-  getActiveRoute = path =>
-    Object
-      .keys(this.routes)
-      .indexOf(path)
+  onLogout = () =>
+    firebase.auth().signOut()
 
   render () {
+    const { classes } = this.props;
+
     return (
       <section className="h__navbar">
 
@@ -92,8 +107,15 @@ export default class Navbar extends Component {
           }
         </ul>
 
-        <Login Auth={ this.props.Auth } />
+        <div
+          className="h__navbar__button"
+          onClick={ this.onLogout }>
+          <IconLogout className={ classes.button } />
+          <span>Logout</span>
+        </div>
       </section>
     );
   }
 }
+
+export default withRouter(withStyles(styles)(Navbar));

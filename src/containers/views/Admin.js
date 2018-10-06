@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
-import { useAdmin } from 'src/lib/decorators/socket';
+import { useSocket } from 'src/lib/decorators';
 import refs from 'src/constants/refs';
 import * as types from 'src/actions/types';
 
@@ -19,7 +19,7 @@ import {
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
 @augmentComponent([
-  useAdmin
+  useSocket
 ], {
   socket: { refs: [refs.PROJECTS] }
 })

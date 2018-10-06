@@ -35,7 +35,7 @@
     @include transition(all, 0.3s, $transition-hover);
     position: relative;
     display: block;
-    padding: 15px 20px;
+    padding: 16px 20px;
     z-index: 10;
     white-space: nowrap;
     overflow: hidden;
@@ -76,8 +76,9 @@
     .active & {
       height: 400%;
       z-index: 20;
-      -webkit-transform: scale3d(1.1, 1, 1);
-      transform: scale3d(1.1, 1, 1);
+      -webkit-transform: scale3d(1.2, 1, 1) ;
+      transform: scale3d(1.2, 1, 1);
+      box-shadow: 0px 3px 9px -3px;
     }
 
     ul {
@@ -92,7 +93,7 @@
 
     li {
       @include transition(all, 0.25s, $transition-ease-out);
-      padding: 10px 0;
+      padding: 15px 0;
       opacity: 0;
       -webkit-transform: translate3d(30%, 0, 0);
       transform: translate3d(30%, 0, 0);
@@ -115,8 +116,9 @@
   &.active {
 
     &:before {
-      -webkit-transform: scale3d(1.1, 1.5, 1);
-      transform: scale3d(1.1, 1.5, 1);
+      -webkit-transform: scale3d(1.2, 1.5, 1);
+      transform: scale3d(1.2, 1.5, 1);
+      box-shadow: 0px -1px 5px -2px;
     }
   }
 }

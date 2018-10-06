@@ -5,13 +5,37 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
+import { augmentComponent } from 'react-augment';
+import { useSocket } from 'src/lib/decorators';
 import * as types from 'src/actions/types';
 import refs from 'src/constants/refs';
 import { Route } from 'react-router-dom';
-import { routeCodes } from 'src/routes';
-
+import { routes } from 'src/routes';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 import { ProjectPreview, ProjectYear } from 'src/components/project';
 import { Project } from 'src/containers/views';
+import IconAdd from '@material-ui/icons/CreateNewFolder';
+
+const styles = theme => ({
+  button: {
+    'marginLeft': theme.spacing.unit * 4,
+    'background': `linear-gradient(to bottom right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+    'color': '#fff',
+    'width': 150,
+    'height': 45,
+    'textTransform': 'capitalize',
+    '&:hover': {
+      boxShadow: '0 1px 3px #999'
+    }
+  },
+  btnIcon: {
+    marginRight: theme.spacing.unit
+  },
+  input: {
+    display: 'none'
+  }
+});
 
 @connect(state => ({
   Projects: state.projectsReducer[types.PROJECTS],
@@ -20,22 +44,27 @@ import { Project } from 'src/containers/views';
 }), dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch)
 }))
+@augmentComponent([
+  useSocket
+], {
+  socket: { refs: [refs.PROJECTS] }
+})
 class Projects extends Component {
 
     static propTypes = {
       actions: t.object.isRequired,
-
-      location: t.object,
-      Projects: t.object,
+      Projects: t.object.isRequired,
+      location: t.object.isRequired,
       Periods: t.object,
       Transition: t.object.isRequired
     }
 
     static defaultProps = {
-      location: {},
-      Projects: {},
       Periods: {}
     }
+
+    static getProjectIndex = index =>
+      `${index + 1 > 9 ? '' : '0'}${index + 1}`
 
     constructor (props) {
       super(props);
@@ -73,7 +102,7 @@ class Projects extends Component {
         this.getProjects())
 
     render () {
-      const { location } = this.props;
+      const { location, classes } = this.props;
 
       const inTransition = location.state && location.state.to === 'details';
       const position = inTransition && location.state.meta.from || {};
@@ -81,11 +110,21 @@ class Projects extends Component {
       return (
         <article className="h__article">
 
-          <div className="h__article__actions">
-            <span>Projects</span>
+          <div className="h__article__header">
+            <div className="h__article__header-label">
+              Projects
+            </div>
 
-            <ProjectYear
-              onPeriodChange={ this.onPeriodChange } />
+            <div className="h__article__header-actions">
+              <ProjectYear
+                onPeriodChange={ this.onPeriodChange } />
+
+              <Button
+                className={ classes.button }>
+                <IconAdd className={ classes.btnIcon } />
+                <span>New</span>
+              </Button>
+            </div>
           </div>
 
 
@@ -94,7 +133,7 @@ class Projects extends Component {
               inTransition
               && (
                 <Route
-                  path={ `${routeCodes.PROJECTS}/:id` }
+                  path={ `${routes.PROJECTS}/:id` }
                   render={ props => <Project { ...props } position={ position } /> } />
               )
             }
@@ -107,7 +146,7 @@ class Projects extends Component {
                   .map((project, index) => (
                     <li
                       key={ index }
-                      data-text={ `${index + 1 > 9 ? '' : '0'}${index + 1}` }
+                      data-text={ Projects.getProjectIndex(index) }
                       className={ classNames({
                         active: this.props.Transition.index === index
                       }) }>
@@ -128,4 +167,4 @@ class Projects extends Component {
     }
 }
 
-export default Projects;
+export default withStyles(styles)(Projects);

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import App from 'src/containers/core/App';
-import { Projects, Admin } from 'src/containers/views';
+import { Login, Projects, Admin } from 'src/containers/views';
 import history from './history';
 
 const publicPath = '/';
 
-export const routeCodes = {
+export const routes = {
   ROOT: publicPath,
-  PROJECTS: `${ publicPath }projects`,
-  ADMIN: `${ publicPath }admin`
+  ADMIN: `${ publicPath }admin`,
+  ADMIN_PROJECTS: `${ publicPath }admin/projects`
 };
 
 export default class Routes extends Component {
@@ -18,9 +18,9 @@ export default class Routes extends Component {
       <Router history={ history }>
         <App>
           <Switch>
-            <Route exact path={ routeCodes.ROOT } component={ Projects } />
-            <Route path={ routeCodes.PROJECTS } component={ Projects } />
-            <Route path={ routeCodes.ADMIN } component={ Admin } />
+            <Route exact path={ routes.ROOT } component={ Login } />
+            <Route exact path={ routes.ADMIN } component={ Admin } />
+            <Route path={ routes.ADMIN_PROJECTS } component={ Projects } />
           </Switch>
         </App>
       </Router>

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'src/actions';
 import { augmentComponent } from 'react-augment';
 import { useNavigation } from 'src/lib/decorators';
-import { routeCodes } from 'src/routes';
+import { routes } from 'src/routes';
 
 import { ProjectItem } from 'src/components/project';
 import { AnimateGrow, AnimateDetails } from 'src/components/animate';
@@ -39,7 +39,7 @@ class Project extends Component {
   onBack = () =>
     this.setState({ active: false }, () => {
       this.props.actions.setTransition({ active: false, index: null });
-      return this.props.navigateDebounce(routeCodes.PROJECTS, null, 275);
+      return this.props.navigateDebounce(routes.PROJECTS, null, 275);
     })
 
   render () {

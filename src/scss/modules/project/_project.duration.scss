@@ -11,8 +11,8 @@
     font-size: 10vw;
     font-weight: bold;
     text-align: center;
-    background-color: $color-highlight;
-    color: $color-font-primary;
+    background-color: $color-blue;
+    color: $color-primary;
 
     > div {
       margin-top: 5px;
@@ -20,7 +20,7 @@
       font-size: 4vw;
       font-family: $font-roboto;
       text-transform: uppercase;
-      color: $color-font-secondary;
+      color: $color-secondary;
     }
 
     &:after {
@@ -32,13 +32,13 @@
       width: 0;
       height: 0;
       border: 11vw solid transparent;
-      border-right: 5vw solid $color-highlight;
+      border-right: 5vw solid $color-blue;
 
       .h__project--even & {
         left: -20vw;
         right: 100%;
         border-left: 15vw solid transparent;
-        border-right: 5vw solid $color-highlight;
+        border-right: 5vw solid $color-blue;
       }
     }
   }

@@ -17,33 +17,26 @@
     flex-direction: column;
   }
 
-  &__actions {
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 40px 0;
 
-    > span {
+    &-label {
       font-family: $font-raleway;
       font-size: 32px;
       font-weight: 300;
       color: $color-grey-dark;
+    }
+
+    &-actions {
+
     }
   }
 
   &__inner {
     padding-bottom: 60px;
     width: 100%;
-  }
-
-  &:before {
-    @include transition(all, 0.3s, ease);
-    position: absolute;
-    content: '';
-    background: #000;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: auto;
   }
 }

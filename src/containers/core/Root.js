@@ -8,9 +8,10 @@ import DevTools from './DevTools';
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#e56590' },
-    secondary: { main: '#3e75c8' },
-    accentColor: '#e0b733'
+    primary: { main: '#ffB88C' },
+    secondary: { main: '#e56590' },
+    green: { main: '#4ccbab' },
+    blue: { main: '#039be5' }
   }
 });
 
