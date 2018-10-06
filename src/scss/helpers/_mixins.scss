@@ -1,12 +1,12 @@
 @mixin transition ($type, $time, $effect, $delay: 0s) {
-  transition-property: $type !important;
-  -webkit-transition-property: $type !important;
-  transition-duration: $time !important;
-  -webkit-transition-duration: $time !important;
-  transition-timing-function: $effect !important;
-  -webkit-transition-timing-function: $effect !important;
-  transition-delay: $delay !important;
-  -webkit-transition-delay: $delay !important;
+  transition-property: $type;
+  -webkit-transition-property: $type;
+  transition-duration: $time;
+  -webkit-transition-duration: $time;
+  transition-timing-function: $effect;
+  -webkit-transition-timing-function: $effect;
+  transition-delay: $delay;
+  -webkit-transition-delay: $delay;
 }
 
 @mixin clearfix () {

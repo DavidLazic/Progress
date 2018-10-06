@@ -9,15 +9,21 @@ import { augmentComponent } from 'react-augment';
 import { useSocket } from 'src/lib/decorators';
 import * as types from 'src/actions/types';
 import refs from 'src/constants/refs';
+import { ProjectsService } from 'src/lib/services';
 import { Route } from 'react-router-dom';
 import { routes } from 'src/routes';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { ProjectPreview, ProjectYear } from 'src/components/project';
 import { Project } from 'src/containers/views';
-import IconAdd from '@material-ui/icons/CreateNewFolder';
+import { FormProject } from 'src/components/form';
+import Dialog from '@material-ui/core/Dialog';
+import IconAdd from '@material-ui/icons/NoteAdd';
 
 const styles = theme => ({
+  dialog: {
+    minWidth: 680
+  },
   button: {
     'marginLeft': theme.spacing.unit * 4,
     'background': `linear-gradient(to bottom right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
@@ -55,6 +61,7 @@ class Projects extends Component {
       actions: t.object.isRequired,
       Projects: t.object.isRequired,
       location: t.object.isRequired,
+      onApply: t.func.isRequired,
       Periods: t.object,
       Transition: t.object.isRequired
     }
@@ -69,14 +76,25 @@ class Projects extends Component {
     constructor (props) {
       super(props);
       this.state = {
-        active: null
+        edit: false,
+        year: null
       };
     }
+
+    reset = () =>
+      this.setState({ edit: false })
+
+    createProject = () => this.setState({ edit: true })
+
+    onProjectCreate = project =>
+      ProjectsService
+        .onProjectCreate(project)
+        .then(this.props.onApply);
 
     getProjects = () =>
       Promise.all(
         Object
-          .keys(this.props.Periods.data[this.state.active])
+          .keys(this.props.Periods.data[this.state.year])
           .map(id =>
             new Promise(resolve =>
               firebase
@@ -97,8 +115,8 @@ class Projects extends Component {
         index
       })
 
-    onPeriodChange = active =>
-      this.setState({ active }, () =>
+    onPeriodChange = year =>
+      this.setState({ year }, () =>
         this.getProjects())
 
     render () {
@@ -120,6 +138,7 @@ class Projects extends Component {
                 onPeriodChange={ this.onPeriodChange } />
 
               <Button
+                onClick={ this.createProject }
                 className={ classes.button }>
                 <IconAdd className={ classes.btnIcon } />
                 <span>New</span>
@@ -161,6 +180,20 @@ class Projects extends Component {
               }
             </ul>
           </div>
+
+          {
+            this.state.edit
+            && (
+              <Dialog
+                PaperProps={ { classes: { root: classes.dialog } } }
+                open>
+                <FormProject
+                  prepopulate={ this.state.data }
+                  onSubmit={ this.onProjectCreate }
+                  onCancel={ this.reset } />
+              </Dialog>
+            )
+          }
 
         </article>
       );

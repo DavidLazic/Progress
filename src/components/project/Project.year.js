@@ -34,6 +34,8 @@ class ProjectYear extends Component {
       selected: null,
       open: false
     };
+
+    this.select = React.createRef();
   }
 
   componentDidMount () {
@@ -52,7 +54,7 @@ class ProjectYear extends Component {
   }
 
   onDocumentClick = e =>
-    (e.target !== this.select)
+    (e.target !== this.select.current)
     && this.setState({ open: false })
 
   onPeriodChange = (activeIndex, selected) =>
@@ -69,7 +71,7 @@ class ProjectYear extends Component {
         }) }>
 
         <span
-          ref={ ref => this.select = ref }
+          ref={ this.select }
           className="h__select__placeholder"
           onClick={ () => this.setState({ open: true }) }>
           {
