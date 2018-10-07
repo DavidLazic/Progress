@@ -9,8 +9,12 @@ export default class Tags extends Component {
   static propTypes = {
     name: t.string.isRequired,
     label: t.string.isRequired,
-    tags: t.object.isRequired,
+    tags: t.object,
     onChange: t.func.isRequired
+  }
+
+  static defaultProps = {
+    tags: {}
   }
 
   state = { tag: '' }

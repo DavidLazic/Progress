@@ -1,11 +1,7 @@
-import Login from './Login';
-import Project from './Project.single';
-import Projects from './Projects';
-import Admin from './Admin';
+import ViewLogin from './View.login';
+import ViewProjects from './View.projects';
 
 export {
-  Login,
-  Project,
-  Projects,
-  Admin
+  ViewLogin,
+  ViewProjects
 };

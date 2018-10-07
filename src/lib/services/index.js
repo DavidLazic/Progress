@@ -1,5 +1,5 @@
-import { ProjectsService } from './Projects.service';
+import { ServiceProjects } from './Service.projects';
 
 export {
-  ProjectsService
+  ServiceProjects
 };

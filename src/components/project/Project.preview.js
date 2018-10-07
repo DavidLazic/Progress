@@ -1,49 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import t from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ActionCreators } from 'src/actions';
-import { augmentComponent } from 'react-augment';
-import { useTransition, useNavigation } from 'src/lib/decorators';
-import { routes } from 'src/routes';
+import IconDelete from '@material-ui/icons/Delete';
+import IconEdit from '@material-ui/icons/Edit';
 
-@connect(state => state, dispatch => ({
-  actions: bindActionCreators(ActionCreators, dispatch)
-}))
-@augmentComponent([
-  useNavigation,
-  useTransition
-])
-class ProjectPreview extends Component {
+export const ProjectPreview = props => (
+  <div
+    className="h__project-preview">
+    { props.project.title }
 
-  static propTypes = {
-    actions: t.object.isRequired,
-    onTransition: t.func.isRequired,
+    <div className="h__project-actions">
+      <IconEdit
+        className="h__btn h__btn--action"
+        onClick={ props.onProjectAction('edit', props.project) } />
+      <IconDelete
+        className="h__btn h__btn--action"
+        onClick={ props.onProjectAction('delete', props.project) } />
+    </div>
+  </div>
+);
 
-    id: t.string.isRequired,
-    project: t.object.isRequired
-  }
-
-  onSelect = () => {
-    this.props.actions.setTransition({ active: true, index: this.props.project.index });
-
-    this.props.onTransition(`${routes.PROJECTS}/${this.props.id}`, {
-      id: this.props.id,
-      data: this.props.project
-    });
-  }
-
-  render () {
-    const { project } = this.props;
-
-    return (
-      <div
-        className="h__project__preview"
-        onClick={ this.onSelect }>
-        { project.title }
-      </div>
-    );
-  }
-}
-
-export default ProjectPreview;
+ProjectPreview.propTypes = {
+  project: t.object.isRequired,
+  onProjectAction: t.func.isRequired
+};

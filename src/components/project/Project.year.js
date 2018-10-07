@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
 import classNames from 'classnames';
-import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ActionCreators } from 'src/actions';
 import * as types from 'src/actions/types';
-import refs from 'src/constants/refs';
 import IconMenu from '@material-ui/icons/ArrowDropDown';
 
 @connect(state => ({
   Periods: state.projectsReducer[types.PROJECTS_PERIODS]
-}), dispatch => ({
-  actions: bindActionCreators(ActionCreators, dispatch)
 }))
 class ProjectYear extends Component {
 
   static propTypes = {
-    actions: t.object.isRequired,
     Periods: t.object,
     onPeriodChange: t.func
   }
@@ -40,13 +33,6 @@ class ProjectYear extends Component {
 
   componentDidMount () {
     document.addEventListener('click', this.onDocumentClick);
-
-    firebase
-      .database()
-      .ref(refs.PERIODS)
-      .once('value', snapshot =>
-        this.props.actions.projectsPeriods(snapshot.val())
-      );
   }
 
   componentWillUnmount () {
@@ -62,6 +48,7 @@ class ProjectYear extends Component {
       this.props.onPeriodChange(selected))
 
   render () {
+    const { Periods } = this.props;
 
     return (
       <div
@@ -74,9 +61,7 @@ class ProjectYear extends Component {
           ref={ this.select }
           className="h__select__placeholder"
           onClick={ () => this.setState({ open: true }) }>
-          {
-            this.state.selected || 'Year'
-          }
+          { this.state.selected || 'Year' }
           <span>
             <IconMenu />
           </span>
@@ -85,9 +70,9 @@ class ProjectYear extends Component {
         <div className="h__select__options">
           <ul>
             {
-              this.props.Periods.data
+              Periods.data
               && Object
-                .keys(this.props.Periods.data)
+                .keys(Periods.data)
                 .reverse()
                 .map((key, index) => (
                   <li

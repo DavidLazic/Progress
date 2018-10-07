@@ -1,5 +1,5 @@
 import ProjectItem from './Project.item';
-import ProjectPreview from './Project.preview';
+import { ProjectPreview } from './Project.preview';
 import ProjectYear from './Project.year';
 
 export {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import t from 'prop-types';
-import firebase from 'src/firebase';
+import { db } from 'src/firebase';
 
 /**
  * @description
@@ -26,31 +26,27 @@ export const useSocket = (WrappedComponent = () => null, { socket } = {}) =>
       return socket
         && socket.refs
         && socket.refs
-          .map(ref => firebase
-            .database()
-            .ref(ref)
-            .on('value', this.onChange.bind(this, ref)));
+          .map(ref =>
+            db
+              .ref(ref)
+              .on('value', this.onChange.bind(this, ref)));
     }
 
     componentWillUnmount () {
       return socket
         && socket.refs
         && socket.refs
-          .map(ref => firebase
-            .database()
-            .ref(ref)
-            .off('value', this.onChange));
+          .map(ref =>
+            db
+              .ref(ref)
+              .off('value', this.onChange));
     }
 
     onChange = (ref, snapshot) => this.props.actions[ref](snapshot.val())
 
-    onApply = updates => firebase.database().ref().update(updates)
-
     render () {
       return (
-        <WrappedComponent
-          onApply={ this.onApply }
-          { ...this.props } />
+        <WrappedComponent { ...this.props } />
       );
     }
   };
