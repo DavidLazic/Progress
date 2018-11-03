@@ -3,9 +3,9 @@
   display: flex;
   padding: 0 40px;
   flex-direction: column;
-  margin-left: 300px;
+  margin-left: 280px;
   min-height: 100%;
-  width: calc(100% - 300px);
+  width: calc(100% - 280px);
   overflow: hidden;
   background: $color-grey-light;
 
@@ -24,14 +24,17 @@
     padding: 40px 0;
 
     &-label {
-      font-family: $font-raleway;
+      font-family: $font-roboto;
       font-size: 32px;
       font-weight: 300;
       color: $color-grey-dark;
     }
 
     &-actions {
-
+      button span {
+        font-family: $font-prequel;
+        text-transform: uppercase;
+      }
     }
   }
 

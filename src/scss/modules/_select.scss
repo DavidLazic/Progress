@@ -62,7 +62,9 @@
     .active & {
       height: 400%;
       z-index: 20;
-      box-shadow: $shadow-three;
+      box-shadow: $shadow-two;
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
     }
 
     ul {

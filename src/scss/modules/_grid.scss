@@ -4,14 +4,19 @@
   grid-gap: 30px;
 
   li {
+    @include transition(all, 0.25s, ease);
     position: relative;
     padding-top: 100%;
-    border-radius: 2px;
+    overflow: hidden;
+    border-radius: 4px;
     background: #fff;
     color: $color-grey-dark;
+    cursor: pointer;
 
-    > div {
-      @include center();
+    &:hover {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+      box-shadow: $shadow-three;
     }
   }
 }

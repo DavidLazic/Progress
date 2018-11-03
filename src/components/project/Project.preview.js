@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import t from 'prop-types';
 import IconDelete from '@material-ui/icons/Delete';
 import IconEdit from '@material-ui/icons/Edit';
 
 export const ProjectPreview = props => (
-  <div
-    className="h__project-preview">
-    { props.project.title }
+  <Fragment>
+    <div
+      className="h__project-preview">
+      { props.project.title }
+    </div>
 
     <div className="h__project-actions">
       <IconEdit
@@ -16,7 +18,7 @@ export const ProjectPreview = props => (
         className="h__btn h__btn--action"
         onClick={ props.onProjectAction('delete', props.project) } />
     </div>
-  </div>
+  </Fragment>
 );
 
 ProjectPreview.propTypes = {

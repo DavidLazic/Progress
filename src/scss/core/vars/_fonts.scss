@@ -1,3 +1,41 @@
+@font-face {
+  font-family: 'Prequelrough';
+  src: url('assets/fonts/Prequel/prequel-rough-webfont.eot');
+  src: url('assets/fonts/Prequel/prequel-rough-webfont.eot?#iefix') format('embedded-opentype'),
+       url('assets/fonts/Prequel/prequel-rough-webfont.woff2') format('woff2'),
+       url('assets/fonts/Prequel/prequel-rough-webfont.woff') format('woff'),
+       url('assets/fonts/Prequel/prequel-rough-webfont.ttf') format('truetype'),
+       url('assets/fonts/Prequel/prequel-rough-webfont.svg#Prequelrough') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+	font-family: 'Tungsten-Medium';
+	src: url('assets/fonts/Tungsten/Medium/Tungsten-Medium.eot');
+	src: url('assets/fonts/Tungsten/Medium/Tungsten-Medium.eot?#iefix') format('embedded-opentype'),
+		 url('assets/fonts/Tungsten/Medium/Tungsten-Medium.woff') format('woff'),
+		 url('assets/fonts/Tungsten/Medium/Tungsten-Medium.ttf') format('truetype'),
+		 url('assets/fonts/Tungsten/Medium/Tungsten-Medium.svg#Tungsten-Medium') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Tungsten-Semibold';
+	src: url('assets/fonts/Tungsten/Semibold/Tungsten-Semibold.eot');
+	src: url('assets/fonts/Tungsten/Semibold/Tungsten-Semibold.eot?#iefix') format('embedded-opentype'),
+		 url('assets/fonts/Tungsten/Semibold/Tungsten-Semibold.woff') format('woff'),
+		 url('assets/fonts/Tungsten/Semibold/Tungsten-Semibold.ttf') format('truetype'),
+		 url('assets/fonts/Tungsten/Semibold/Tungsten-Semibold.svg#Tungsten-Semibold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
 $font-default: Arial, sans-serif;
 $font-roboto: 'Roboto', $font-default;
 $font-raleway: 'Raleway', $font-default;
+$font-prequel: 'Prequelrough', $font-default;
+$font-tungsten: 'Tungsten-Medium', $font-default;
+$font-tungsten-bold: 'Tungsten-Semibold', $font-default;

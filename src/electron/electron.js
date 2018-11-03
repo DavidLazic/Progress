@@ -17,7 +17,7 @@ app.on('ready', () => {
 
   if (env.name === 'development') {
     BrowserWindow.addDevToolsExtension(
-      '/Users/dlazic/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.4.0_0'
+      '/Users/dlazic/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.4.2_0'
     );
   }
 

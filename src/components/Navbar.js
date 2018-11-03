@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import firebase from 'src/firebase';
 import IconProjects from '@material-ui/icons/ViewList';
-import IconAdmin from '@material-ui/icons/Assessment';
 import IconArrow from '@material-ui/icons/ChevronRight';
 import { AnimateRipple } from 'src/components/animate';
 import IconLogout from '@material-ui/icons/PowerSettingsNew';
@@ -38,11 +37,6 @@ class Navbar extends Component {
         label: 'Projects',
         icon: <IconProjects />,
         restriction: () => true
-      },
-      [routes.ADMIN]: {
-        label: 'Admin',
-        icon: <IconAdmin />,
-        restriction: Auth => !!Auth.data
       }
     };
     this.state = {

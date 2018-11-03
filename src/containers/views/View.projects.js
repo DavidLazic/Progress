@@ -173,7 +173,7 @@ class ViewProjects extends Component {
               <Dialog open>
                 <DialogTitle>Delete project</DialogTitle>
                 <DialogContent>
-                  { `Proceed deleting the project "${project.title}"?` }
+                  { `Delete project "${project.title}"?` }
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={ this.reset }>

@@ -1,6 +1,24 @@
 .h__project {
 
-  &__preview {
-    height: 100%;
+  &-preview {
+    @include center();
+    font-family: $font-prequel;
+  }
+
+  &-actions {
+    @include transition(transform, 0.25s, ease);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+
+    li:hover & {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
   }
 }
